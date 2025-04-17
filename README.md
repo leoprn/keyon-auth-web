@@ -1,3 +1,50 @@
+# Supabase Auth Redirects
+
+Este proyecto maneja las redirecciones de autenticación para Supabase, específicamente para la verificación de email y el reseteo de contraseña.
+
+## Configuración
+
+1. Clona este repositorio
+2. Instala las dependencias:
+```bash
+npm install
+```
+
+3. Copia el archivo de variables de entorno:
+```bash
+cp .env.example .env.local
+```
+
+4. Actualiza las variables en `.env.local` con tus credenciales de Supabase:
+- `NEXT_PUBLIC_SUPABASE_URL`: La URL de tu proyecto en Supabase
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`: La clave anónima de tu proyecto en Supabase
+
+## Configuración en Supabase
+
+1. En tu dashboard de Supabase, ve a Authentication > URL Configuration
+2. Configura las siguientes URLs:
+   - Site URL: `https://tu-dominio.vercel.app`
+   - Redirect URLs:
+     - `https://tu-dominio.vercel.app/auth/callback/verify-email`
+     - `https://tu-dominio.vercel.app/auth/callback/reset-password`
+
+## Desarrollo Local
+
+```bash
+npm run dev
+```
+
+## Despliegue en Vercel
+
+1. Conecta tu repositorio a Vercel
+2. Configura las variables de entorno en el dashboard de Vercel
+3. ¡Despliega!
+
+## Rutas Disponibles
+
+- `/auth/callback/verify-email`: Maneja la verificación de email
+- `/auth/callback/reset-password`: Maneja el reseteo de contraseña
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
