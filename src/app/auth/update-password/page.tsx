@@ -9,8 +9,16 @@ import Logo from '@/components/Logo'
 // Componente de carga simple
 function LoadingFallback() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <p>Cargando formulario...</p>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="p-8 max-w-md w-full bg-white rounded-lg shadow-md">
+        <div className="text-center mb-6">
+          <Logo />
+          <h1 className="text-2xl font-bold text-gray-800 mt-4">Establecer Nueva Contraseña</h1>
+        </div>
+        <div className="p-4 mb-4 rounded-lg text-sm bg-gray-100 text-gray-700">
+          Cargando formulario...
+        </div>
+      </div>
     </div>
   )
 }
@@ -37,7 +45,14 @@ function UpdatePasswordContent() {
           
           if (exchangeError) {
             console.error('Error al intercambiar token por sesión:', exchangeError)
-            setError('Error al procesar el token de recuperación: ' + exchangeError.message)
+            // Traducir el mensaje de error
+            let errorMessage = exchangeError.message
+            if (errorMessage.includes('invalid') || errorMessage.includes('expired')) {
+              errorMessage = 'El enlace no es válido o ha expirado'
+            } else if (errorMessage.includes('JWT')) {
+              errorMessage = 'El token de seguridad no es válido'
+            }
+            setError('Error al procesar el token de recuperación: ' + errorMessage)
           }
         } catch (err) {
           console.error('Error inesperado al procesar el token:', err)
@@ -53,7 +68,14 @@ function UpdatePasswordContent() {
           
           if (verifyError) {
             console.error('Error al verificar OTP:', verifyError)
-            setError('Error al verificar el token: ' + verifyError.message)
+            // Traducir el mensaje de error
+            let errorMessage = verifyError.message
+            if (errorMessage.includes('invalid') || errorMessage.includes('expired')) {
+              errorMessage = 'El enlace no es válido o ha expirado'
+            } else if (errorMessage.includes('JWT')) {
+              errorMessage = 'El token de seguridad no es válido'
+            }
+            setError('Error al verificar el token: ' + errorMessage)
           }
         } catch (err) {
           console.error('Error inesperado al verificar el token:', err)
@@ -69,16 +91,17 @@ function UpdatePasswordContent() {
   
   if (loading) {
     return (
-      <div className="p-4 mb-4 rounded-lg text-sm bg-blue-100 text-blue-700">
-        Verificando sesión...
+      <div className="p-4 mb-4 rounded-lg bg-blue-100 text-blue-700">
+        <p className="text-center">Verificando sesión...</p>
       </div>
     )
   }
   
   if (error) {
     return (
-      <div className="p-4 mb-4 rounded-lg text-sm bg-red-100 text-red-700">
-        {error}
+      <div className="p-4 mb-4 rounded-lg bg-red-100 text-red-700">
+        <p className="text-lg font-bold">Error de verificación</p>
+        <p>{error.replace('Error al procesar el token de recuperación: ', '').replace('Error al verificar el token: ', '')}</p>
       </div>
     )
   }
