@@ -64,7 +64,17 @@ function VerifyEmailContent() {
         })
 
         if (verifyError) {
-          setError(`Error al verificar: ${verifyError.message}`)
+          // Traducir mensajes de error comunes
+          let errorMessage = verifyError.message
+          if (errorMessage.includes('invalid') || errorMessage.includes('expired')) {
+            errorMessage = 'El enlace no es válido o ha expirado'
+          } else if (errorMessage.includes('JWT')) {
+            errorMessage = 'El token de seguridad no es válido'
+          } else if (errorMessage.includes('already verified')) {
+            errorMessage = 'Este email ya ha sido verificado'
+          }
+          
+          setError(`Error al verificar: ${errorMessage}`)
           setMessage(null)
         } else {
           setMessage('Email verificado con éxito.')
@@ -88,14 +98,15 @@ function VerifyEmailContent() {
         </div>
 
         {message && (
-          <div className="p-4 mb-4 rounded-lg text-sm bg-green-100 text-green-700">
-            {message}
+          <div className="p-4 mb-4 rounded-lg bg-green-100 text-green-700">
+            <p className="text-xl font-bold">¡Tu email ya está verificado!</p>
           </div>
         )}
 
         {error && (
-          <div className="p-4 mb-4 rounded-lg text-sm bg-red-100 text-red-700">
-            {error}
+          <div className="p-4 mb-4 rounded-lg bg-red-100 text-red-700">
+            <p className="text-lg font-bold">Error al verificar</p>
+            <p>{error.replace('Error al verificar: ', '')}</p>
           </div>
         )}
 
@@ -112,7 +123,7 @@ function VerifyEmailContent() {
             </p>
             <a
               href="keyonapp://login"
-              className="block w-full bg-purple-600 text-white py-3 px-4 rounded-lg hover:bg-purple-700 transition-colors text-center font-medium">
+              className="block w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors text-center font-medium">
               Abrir App KeyOn
             </a>
           </div>
