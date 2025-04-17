@@ -1,15 +1,9 @@
-'use client'
+// Mantenemos esta página como Server Component
 
-// Completamente desactivamos SSR
-export const dynamic = 'force-dynamic'
-export const runtime = 'edge'
-export const preferredRegion = 'auto'
+import { Suspense } from 'react'
+import ClientResetPassword from './ClientResetPassword' // Nuevo componente cliente
 
-import { Suspense, useEffect, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
-import ResetPasswordForm from '@/components/auth/ResetPasswordForm'
-
-// Componente de carga local para evitar problemas de importación
+// Componente de carga
 function LoadingFallback() {
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -21,30 +15,10 @@ function LoadingFallback() {
 }
 
 export default function ResetPasswordPage() {
-  // Renderizado en dos pasos para evitar errores de hydration
-  const [isClient, setIsClient] = useState(false)
-  
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-  
-  // Solo renderizamos el componente real en el cliente
-  if (!isClient) {
-    return <LoadingFallback />
-  }
-  
+  // El Server Component solo renderiza Suspense
   return (
     <Suspense fallback={<LoadingFallback />}>
       <ClientResetPassword />
     </Suspense>
   )
-}
-
-// Componente separado para asegurar que useSearchParams no se ejecute durante SSR
-function ClientResetPassword() {
-  const searchParams = useSearchParams()
-  const token_hash = searchParams.get('token_hash') || ''
-  const type = searchParams.get('type') || ''
-  
-  return <ResetPasswordForm />
 } 

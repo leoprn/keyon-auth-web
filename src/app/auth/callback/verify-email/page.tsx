@@ -1,51 +1,24 @@
-'use client'
+// Mantenemos esta página como Server Component
 
-// Completamente desactivamos SSR
-export const dynamic = 'force-dynamic'
-export const runtime = 'edge'
-export const preferredRegion = 'auto'
+import { Suspense } from 'react'
+import ClientVerifyEmail from './ClientVerifyEmail' // Nuevo componente cliente
 
-import { Suspense, useEffect, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
-import VerifyEmailForm from '@/components/auth/VerifyEmailForm'
-
-// Componente de carga local para evitar problemas de importación
+// Componente de carga
 function LoadingFallback() {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="p-4 max-w-md w-full bg-white rounded-lg shadow">
-        <h1 className="text-2xl font-bold text-center mb-4">Cargando...</h1>
+        <h1 className="text-2xl font-bold text-center mb-4">Verificando...</h1>
       </div>
     </div>
   )
 }
 
 export default function VerifyEmailPage() {
-  // Renderizado en dos pasos para evitar errores de hydration
-  const [isClient, setIsClient] = useState(false)
-  
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-  
-  // Solo renderizamos el componente real en el cliente
-  if (!isClient) {
-    return <LoadingFallback />
-  }
-  
+  // El Server Component solo renderiza Suspense
   return (
     <Suspense fallback={<LoadingFallback />}>
       <ClientVerifyEmail />
     </Suspense>
   )
-}
-
-// Componente separado para asegurar que useSearchParams no se ejecute durante SSR
-function ClientVerifyEmail() {
-  const searchParams = useSearchParams()
-  const token_hash = searchParams.get('token_hash') || ''
-  const type = searchParams.get('type') || ''
-  const next = searchParams.get('next') || '/'
-  
-  return <VerifyEmailForm />
 } 
