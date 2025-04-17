@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import { EmailOtpType } from '@supabase/supabase-js'
 
-export default function VerifyEmail() {
+function VerifyEmailContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   
@@ -40,5 +40,19 @@ export default function VerifyEmail() {
         </p>
       </div>
     </div>
+  )
+}
+
+export default function VerifyEmail() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="p-4 max-w-md w-full bg-white rounded-lg shadow">
+          <h1 className="text-2xl font-bold text-center mb-4">Cargando...</h1>
+        </div>
+      </div>
+    }>
+      <VerifyEmailContent />
+    </Suspense>
   )
 } 
