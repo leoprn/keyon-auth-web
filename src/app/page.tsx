@@ -12,16 +12,51 @@ export default function Home() {
 
   useEffect(() => {
     const checkSessionAndRedirect = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+      // Verificación crítica para el flujo de reseteo de contraseña:
+      // 1. Verificar si hay un hash de tipo "access_token" o "recovery" en la URL
+      if (typeof window !== 'undefined') {
+        const hasAuthHash = window.location.hash.includes('access_token') || 
+                           window.location.hash.includes('type=recovery');
+        
+        if (hasAuthHash) {
+          console.log('Home: Detectado hash de autenticación en URL. Esperando a Supabase...');
+          
+          // Permitir que Supabase procese el hash (necesita un pequeño delay)
+          // El hash contiene el token que Supabase usará para establecer la sesión
+          await new Promise(resolve => setTimeout(resolve, 500));
+        }
+      }
       
-      if (session) {
-        // Si hay sesión al cargar la home, 
-        // asumimos que viene del callback de reseteo exitoso.
-        // Redirigimos a la página para actualizar contraseña.
-        console.log('Sesión detectada en Home, redirigiendo a /auth/update-password');
-        router.replace('/auth/update-password'); 
-      } else {
-        // Si no hay sesión, terminamos de cargar y mostramos la página normal
+      // 2. Verificar si hay una sesión activa
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (session) {
+          // Si hay una sesión y el usuario acaba de completar un flujo de reseteo
+          // Verificamos si la sesión parece reciente basándonos en el token
+          const isJustAuthenticated = session.access_token && 
+            (!localStorage.getItem('last_authentication_check') || 
+             Date.now() - parseInt(localStorage.getItem('last_authentication_check') || '0') > 300000); // 5+ minutos
+         
+          if (isJustAuthenticated) {
+            // Marcar esta verificación para evitar múltiples redirecciones
+            localStorage.setItem('last_authentication_check', Date.now().toString());
+            
+            console.log('Home: Sesión detectada post-autenticación. Redirigiendo a cambio de contraseña...');
+            router.replace('/auth/update-password');
+            return;
+          } else {
+            // Si hay una sesión pero no es nueva, el usuario probablemente está iniciando sesión normalmente
+            console.log('Home: Sesión existente detectada.');
+            setLoading(false);
+          }
+        } else {
+          // No hay sesión, mostrar la página normal
+          console.log('Home: No se detectó ninguna sesión.');
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error('Error al verificar sesión:', error);
         setLoading(false);
       }
     };
