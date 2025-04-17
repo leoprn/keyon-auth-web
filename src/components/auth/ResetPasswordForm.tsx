@@ -1,17 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import Logo from '@/components/Logo'
 
-interface ResetPasswordFormProps {
-  token_hash: string
-  type: string
-}
-
-export default function ResetPasswordForm({ token_hash, type }: ResetPasswordFormProps) {
+export default function ResetPasswordForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const token_hash = searchParams.get('token_hash') || ''
+  const type = searchParams.get('type') || ''
   const [newPassword, setNewPassword] = useState('')
   const [message, setMessage] = useState<{ type: string; content: string } | null>(null)
 
