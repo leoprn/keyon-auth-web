@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
+import { EmailOtpType } from '@supabase/supabase-js'
 
 export default function ResetPassword() {
   const router = useRouter()
@@ -17,7 +18,10 @@ export default function ResetPassword() {
     
     if (token_hash && type === 'recovery') {
       // Solo verificamos que el token sea válido
-      supabase.auth.verifyOtp({ token_hash, type: 'recovery' })
+      supabase.auth.verifyOtp({ 
+        token_hash, 
+        type: type as EmailOtpType 
+      })
         .then(({ error }) => {
           if (error) {
             setMessage({ type: 'error', content: 'Token inválido o expirado' })

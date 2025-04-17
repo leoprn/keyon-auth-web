@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
+import { EmailOtpType } from '@supabase/supabase-js'
 
 export default function VerifyEmail() {
   const router = useRouter()
@@ -14,7 +15,10 @@ export default function VerifyEmail() {
     const next = searchParams.get('next') ?? '/'
 
     if (token_hash && type) {
-      supabase.auth.verifyOtp({ token_hash, type })
+      supabase.auth.verifyOtp({ 
+        token_hash, 
+        type: type as EmailOtpType 
+      })
         .then(({ error }) => {
           if (!error) {
             // Redirigir al usuario a la página principal o a donde especifique next
