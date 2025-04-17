@@ -1,8 +1,46 @@
+'use client'
+
+import { useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import Logo from "@/components/Logo";
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Home() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const supabase = createClientComponentClient()
+  
+  // Verificar si hay un código de reset password en la URL y redirigir a la página de actualización de contraseña
+  useEffect(() => {
+    async function checkResetCode() {
+      // Comprobar si hay un parámetro de 'code' (usado por Supabase para resetear contraseña)
+      const code = searchParams.get('code')
+      const type = searchParams.get('type')
+      
+      if (code && type === 'recovery') {
+        console.log('Detectado código de reseteo de contraseña, redirigiendo...')
+        try {
+          // Intercambiar el código por una sesión
+          const { error } = await supabase.auth.exchangeCodeForSession(code)
+          
+          if (error) {
+            console.error('Error al intercambiar código:', error)
+            return
+          }
+          
+          // Redirigir al usuario a la página de actualización de contraseña
+          router.push('/auth/update-password')
+        } catch (err) {
+          console.error('Error al procesar código de reseteo:', err)
+        }
+      }
+    }
+    
+    checkResetCode()
+  }, [searchParams, supabase.auth, router])
+  
   return (
     <main className="min-h-screen bg-white overflow-hidden">
       {/* Barra de navegación */}
