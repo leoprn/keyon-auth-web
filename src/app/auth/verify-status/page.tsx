@@ -30,29 +30,14 @@ function VerifyStatusContent() {
         <h1 className="text-2xl font-bold text-green-700 mb-3">¡Email Verificado!</h1>
         <p className="text-gray-600 mb-4">Tu dirección de email ha sido verificada con éxito.</p>
 
-        {/* Botones Deeplink para móviles */}
+        {/* Botón Deeplink para móviles */}
         {isMobile && (
-          <div className="space-y-2 mb-4">
-            <p className="text-sm text-gray-600 mb-2">
-              Selecciona una opción para abrir la app:
-            </p>
-            <a 
-              href="keyon://login"
-              className="inline-block w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out font-medium"
-            >
-              Abrir App (Opción 1)
-            </a>
+          <div className="mb-4">
             <a 
               href="keyonapp://login"
-              className="inline-block w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition duration-150 ease-in-out font-medium"
+              className="inline-block w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition duration-150 ease-in-out font-medium"
             >
-              Abrir App (Opción 2)
-            </a>
-            <a 
-              href="com.keyon.app://login"
-              className="inline-block w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out font-medium"
-            >
-              Abrir App (Opción 3)
+              Abrir App KeyOn
             </a>
           </div>
         )}
