@@ -9,76 +9,123 @@ import Link from 'next/link';
 export default function Home() {
   const router = useRouter();
   const supabase = createClientComponentClient();
-  const [loading, setLoading] = useState(true); // Estado de carga
-  const [hasSession, setHasSession] = useState(false); // Estado para saber si hay sesión (para el botón)
+  const [loading, setLoading] = useState(true);
+  const [hasSession, setHasSession] = useState(false);
+  const [diagnosticInfo, setDiagnosticInfo] = useState<any>({
+    hash: '',
+    urlParams: '',
+    hasToken: false,
+    hasSession: false
+  });
 
   useEffect(() => {
     const checkSessionAndRedirect = async () => {
-      // Verificación crítica para el flujo de reseteo de contraseña:
-      // 1. Verificar si hay un hash de tipo "access_token" o "recovery" en la URL
+      let info: any = {
+        hash: '',
+        urlParams: '',
+        hasToken: false,
+        hasSession: false
+      };
+
       if (typeof window !== 'undefined') {
-        // Intentar ser más permisivo con la detección del hash
-        const fullUrl = window.location.href;
-        const hasAuthHash = window.location.hash.length > 0 || 
-                           fullUrl.includes('access_token') || 
-                           fullUrl.includes('type=recovery') ||
-                           fullUrl.includes('token=');
+        // Capturar información de diagnóstico
+        info.hash = window.location.hash;
+        info.urlParams = window.location.search;
         
-        if (hasAuthHash) {
-          console.log('Home: Detectado posible hash de autenticación. Esperando a Supabase...');
-          // Mayor tiempo de espera para dispositivos móviles
-          await new Promise(resolve => setTimeout(resolve, 1000));
+        // Comprobar explícitamente todos los parámetros
+        const urlParams = new URLSearchParams(window.location.search);
+        info.hasTypeParam = urlParams.has('type');
+        info.typeValue = urlParams.get('type');
+        
+        const fullUrl = window.location.href;
+        info.fullUrl = fullUrl;
+        
+        // Buscar cualquier indicio de token
+        const hasAuthToken = 
+          window.location.hash.length > 0 || 
+          fullUrl.includes('access_token') || 
+          fullUrl.includes('type=recovery') ||
+          fullUrl.includes('token=') ||
+          urlParams.has('token');
+          
+        info.hasToken = hasAuthToken;
+        
+        if (hasAuthToken) {
+          console.log('Home: Detectado posible token. Esperando procesamiento...');
+          // Esperar más tiempo para dispositivos móviles
+          await new Promise(resolve => setTimeout(resolve, 1500));
+        }
+        
+        // Forzar una verificación extra de Supabase
+        try {
+          // Intentar forzar el procesamiento del hash si existe
+          if (window.location.hash.length > 0) {
+            await supabase.auth.getUser();
+          }
+        } catch (e) {
+          console.log('Error al pre-procesar hash:', e);
         }
       }
       
-      // 2. Verificar SIEMPRE si hay una sesión activa
       try {
-        const { data: { session } } = await supabase.auth.getSession();
+        // Intentar múltiples veces obtener la sesión (a veces tarda en establecerse)
+        let session = null;
+        for (let i = 0; i < 3; i++) {
+          const { data } = await supabase.auth.getSession();
+          session = data.session;
+          
+          if (session) {
+            break;
+          } else if (i < 2) { // No esperar en el último intento
+            await new Promise(resolve => setTimeout(resolve, 500));
+          }
+        }
         
         if (session) {
-          console.log('Home: Sesión detectada con token:', session.access_token ? 'Sí' : 'No');
-          setHasSession(true); // Activar el estado de sesión para mostrar el botón
+          info.hasSession = true;
+          info.userId = session.user?.id;
+          info.email = session.user?.email;
           
-          // Intento inmediato de redirección (a veces funciona directamente)
-          try {
-            router.replace('/auth/update-password');
-            // Esperamos un momento para ver si la redirección funciona
-            await new Promise(resolve => setTimeout(resolve, 300));
-          } catch (redirectError) {
-            console.error('Error al intentar redirección automática:', redirectError);
-          }
+          console.log('Home: Sesión detectada:', info);
+          setHasSession(true);
           
-          // De cualquier forma, terminamos el loading para mostrar la UI con el botón
-          setLoading(false);
+          // Intento directo de redirección
+          router.replace('/auth/update-password');
         } else {
-          console.log('Home: No se detectó ninguna sesión.');
-          setHasSession(false);
-          setLoading(false);
+          console.log('Home: No se detectó sesión después de múltiples intentos');
+          info.hasSession = false;
         }
       } catch (error) {
         console.error('Error al verificar sesión:', error);
-        setLoading(false);
+        info.error = String(error);
       }
+      
+      // Actualizar información de diagnóstico y finalizar carga
+      setDiagnosticInfo(info);
+      setLoading(false);
     };
 
     checkSessionAndRedirect();
   }, [supabase, router]);
 
-  // Mostrar un estado de carga mientras se verifica la sesión
+  const manualRedirect = () => {
+    router.push('/auth/update-password');
+  };
+
+  // Mostrar estado de carga con diagnóstico
   if (loading) {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-white">
+      <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-white">
          <Logo />
-         <p className="mt-4 text-gray-600">Verificando...</p>
+         <p className="mt-4 text-gray-600">Verificando sesión...</p>
       </main>
     );
   }
 
-  // UI principal con o sin el botón según el estado de la sesión
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-white">
-      <div className="text-center">
-        <div className="mb-8">
+    <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-white">
+      <div className="text-center max-w-md">
+        <div className="mb-6">
           <Logo />
         </div>
 
@@ -90,19 +137,28 @@ export default function Home() {
           La solución inteligente para el control de accesos.
         </p>
         
-        {/* Mostrar el botón explícito de cambio de contraseña si hay sesión */}
-        {hasSession && (
-          <div className="mt-8">
-            <p className="text-sm text-indigo-600 mb-2">
-              ¿Vienes de un email de recuperación de contraseña?
-            </p>
-            <Link 
-              href="/auth/update-password" 
-              className="block w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 transition-colors duration-200 text-center font-medium">
-                Ir a Cambiar Mi Contraseña
-            </Link>
-          </div>
-        )}
+        {/* Información de diagnóstico */}
+        <div className="my-4 p-4 bg-gray-100 rounded text-left text-xs text-gray-700 overflow-hidden">
+          <p><strong>Diagnóstico:</strong></p>
+          <p>¿Sesión activa?: {diagnosticInfo.hasSession ? 'Sí' : 'No'}</p>
+          <p>¿Token en URL?: {diagnosticInfo.hasToken ? 'Sí' : 'No'}</p>
+          {diagnosticInfo.typeValue && <p>Tipo: {diagnosticInfo.typeValue}</p>}
+          {diagnosticInfo.email && <p>Email: {diagnosticInfo.email}</p>}
+        </div>
+        
+        {/* Botón visible siempre */}
+        <div className="mt-6">
+          <p className="text-sm text-indigo-600 mb-2">
+            {hasSession 
+              ? "Detectamos una sesión. Haz clic para cambiar tu contraseña:" 
+              : "¿Vienes del email de recuperación? Intenta este botón:"}
+          </p>
+          <button 
+            onClick={manualRedirect}
+            className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 transition-colors duration-200 text-center font-medium">
+              Ir a Cambiar Mi Contraseña
+          </button>
+        </div>
       </div>
     </main>
   );
