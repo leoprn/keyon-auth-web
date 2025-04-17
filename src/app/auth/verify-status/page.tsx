@@ -33,17 +33,12 @@ function VerifyStatusContent() {
         {/* Botón Deeplink para móviles */}
         {isMobile && (
           <a 
-            href="com.keyonapp://login" // <-- Deep link actualizado
+            href="keyonapp://login" // <-- Deep link actualizado
             className="mb-4 inline-block w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition duration-150 ease-in-out font-medium"
           >
-            Abrir en la App KeyOn
+            Abrir App
           </a>
         )}
-
-        {/* Mensaje y enlace web (se muestra siempre, pero es más útil en escritorio) */}
-        <p className="text-gray-500 text-sm">
-          Puedes cerrar esta ventana o <Link href={nextUrl || '/'} className="underline text-indigo-600 hover:text-indigo-800">continuar a la aplicación web</Link>.
-        </p>
       </>
     )
   } else {
