@@ -4,55 +4,55 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import Logo from "@/components/Logo";
+import Link from 'next/link';
 
 export default function Home() {
   const router = useRouter();
   const supabase = createClientComponentClient();
   const [loading, setLoading] = useState(true); // Estado de carga
+  const [hasSession, setHasSession] = useState(false); // Estado para saber si hay sesión (para el botón)
 
   useEffect(() => {
     const checkSessionAndRedirect = async () => {
       // Verificación crítica para el flujo de reseteo de contraseña:
       // 1. Verificar si hay un hash de tipo "access_token" o "recovery" en la URL
       if (typeof window !== 'undefined') {
-        const hasAuthHash = window.location.hash.includes('access_token') || 
-                           window.location.hash.includes('type=recovery');
+        // Intentar ser más permisivo con la detección del hash
+        const fullUrl = window.location.href;
+        const hasAuthHash = window.location.hash.length > 0 || 
+                           fullUrl.includes('access_token') || 
+                           fullUrl.includes('type=recovery') ||
+                           fullUrl.includes('token=');
         
         if (hasAuthHash) {
-          console.log('Home: Detectado hash de autenticación en URL. Esperando a Supabase...');
-          
-          // Permitir que Supabase procese el hash (necesita un pequeño delay)
-          // El hash contiene el token que Supabase usará para establecer la sesión
-          await new Promise(resolve => setTimeout(resolve, 500));
+          console.log('Home: Detectado posible hash de autenticación. Esperando a Supabase...');
+          // Mayor tiempo de espera para dispositivos móviles
+          await new Promise(resolve => setTimeout(resolve, 1000));
         }
       }
       
-      // 2. Verificar si hay una sesión activa
+      // 2. Verificar SIEMPRE si hay una sesión activa
       try {
         const { data: { session } } = await supabase.auth.getSession();
         
         if (session) {
-          // Si hay una sesión y el usuario acaba de completar un flujo de reseteo
-          // Verificamos si la sesión parece reciente basándonos en el token
-          const isJustAuthenticated = session.access_token && 
-            (!localStorage.getItem('last_authentication_check') || 
-             Date.now() - parseInt(localStorage.getItem('last_authentication_check') || '0') > 300000); // 5+ minutos
-         
-          if (isJustAuthenticated) {
-            // Marcar esta verificación para evitar múltiples redirecciones
-            localStorage.setItem('last_authentication_check', Date.now().toString());
-            
-            console.log('Home: Sesión detectada post-autenticación. Redirigiendo a cambio de contraseña...');
+          console.log('Home: Sesión detectada con token:', session.access_token ? 'Sí' : 'No');
+          setHasSession(true); // Activar el estado de sesión para mostrar el botón
+          
+          // Intento inmediato de redirección (a veces funciona directamente)
+          try {
             router.replace('/auth/update-password');
-            return;
-          } else {
-            // Si hay una sesión pero no es nueva, el usuario probablemente está iniciando sesión normalmente
-            console.log('Home: Sesión existente detectada.');
-            setLoading(false);
+            // Esperamos un momento para ver si la redirección funciona
+            await new Promise(resolve => setTimeout(resolve, 300));
+          } catch (redirectError) {
+            console.error('Error al intentar redirección automática:', redirectError);
           }
+          
+          // De cualquier forma, terminamos el loading para mostrar la UI con el botón
+          setLoading(false);
         } else {
-          // No hay sesión, mostrar la página normal
           console.log('Home: No se detectó ninguna sesión.');
+          setHasSession(false);
           setLoading(false);
         }
       } catch (error) {
@@ -74,11 +74,11 @@ export default function Home() {
     );
   }
 
-  // Si no hay sesión (y no está cargando), muestra la Home normal
+  // UI principal con o sin el botón según el estado de la sesión
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-white">
       <div className="text-center">
-        <div className="mb-12">
+        <div className="mb-8">
           <Logo />
         </div>
 
@@ -86,9 +86,23 @@ export default function Home() {
           Bienvenido a KeyOn
         </h1>
 
-        <p className="text-lg text-gray-600 mb-10">
+        <p className="text-lg text-gray-600 mb-6">
           La solución inteligente para el control de accesos.
         </p>
+        
+        {/* Mostrar el botón explícito de cambio de contraseña si hay sesión */}
+        {hasSession && (
+          <div className="mt-8">
+            <p className="text-sm text-indigo-600 mb-2">
+              ¿Vienes de un email de recuperación de contraseña?
+            </p>
+            <Link 
+              href="/auth/update-password" 
+              className="block w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 transition-colors duration-200 text-center font-medium">
+                Ir a Cambiar Mi Contraseña
+            </Link>
+          </div>
+        )}
       </div>
     </main>
   );
