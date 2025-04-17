@@ -15,10 +15,9 @@ export default async function VerifyEmail({
 }: {
   searchParams: SearchParams
 }) {
-  const params = await searchParams
-  const token_hash = params.token_hash || ''
-  const type = params.type || ''
-  const next = params.next || '/'
+  const token_hash = searchParams.token_hash || ''
+  const type = searchParams.type || ''
+  const next = searchParams.next || '/'
 
   return (
     <Suspense fallback={

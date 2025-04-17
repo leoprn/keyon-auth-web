@@ -1,9 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
-import { EmailOtpType } from '@supabase/supabase-js'
 import Logo from '@/components/Logo'
 
 interface VerifyEmailFormProps {
@@ -18,21 +17,24 @@ export default function VerifyEmailForm({ token_hash, type, next }: VerifyEmailF
   
   useEffect(() => {
     const verifyEmail = async () => {
-      if (token_hash && type) {
-        try {
-          const { error: verifyError } = await supabase.auth.verifyOtp({ 
-            token_hash, 
-            type: type as EmailOtpType 
-          })
+      if (!token_hash || !type) {
+        setError('Parámetros de verificación inválidos')
+        return
+      }
 
-          if (verifyError) {
-            setError('Error al verificar el email: ' + verifyError.message)
-          } else {
-            router.push(next)
-          }
-        } catch (err) {
-          setError('Error inesperado al verificar el email')
+      try {
+        const { error: verifyError } = await supabase.auth.verifyOtp({
+          token_hash,
+          type: 'signup'
+        })
+
+        if (verifyError) {
+          setError('Error al verificar el email: ' + verifyError.message)
+        } else {
+          router.push(next)
         }
+      } catch (err) {
+        setError('Error inesperado al verificar el email')
       }
     }
 

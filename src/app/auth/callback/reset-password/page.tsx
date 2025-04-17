@@ -14,9 +14,8 @@ export default async function ResetPassword({
 }: {
   searchParams: SearchParams
 }) {
-  const params = await searchParams
-  const token_hash = params.token_hash || ''
-  const type = params.type || ''
+  const token_hash = searchParams.token_hash || ''
+  const type = searchParams.type || ''
 
   return (
     <Suspense fallback={

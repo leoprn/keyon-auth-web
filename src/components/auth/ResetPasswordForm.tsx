@@ -1,9 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
-import { EmailOtpType } from '@supabase/supabase-js'
 import Logo from '@/components/Logo'
 
 interface ResetPasswordFormProps {
@@ -15,28 +14,24 @@ export default function ResetPasswordForm({ token_hash, type }: ResetPasswordFor
   const router = useRouter()
   const [newPassword, setNewPassword] = useState('')
   const [message, setMessage] = useState<{ type: string; content: string } | null>(null)
-  const [isVerifying, setIsVerifying] = useState(true)
-
-  useEffect(() => {
-    if (token_hash && type === 'recovery') {
-      supabase.auth.verifyOtp({ 
-        token_hash, 
-        type: type as EmailOtpType 
-      })
-        .then(({ error }) => {
-          if (error) {
-            setMessage({ type: 'error', content: 'Token inválido o expirado' })
-          }
-          setIsVerifying(false)
-        })
-    }
-  }, [token_hash, type])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setMessage(null)
     
     try {
+      // Primero verificamos el token
+      const { error: verifyError } = await supabase.auth.verifyOtp({
+        token_hash,
+        type: 'recovery'
+      })
+
+      if (verifyError) {
+        setMessage({ type: 'error', content: 'Token inválido o expirado' })
+        return
+      }
+
+      // Si el token es válido, actualizamos la contraseña
       const { error } = await supabase.auth.updateUser({
         password: newPassword
       })
@@ -50,17 +45,6 @@ export default function ResetPasswordForm({ token_hash, type }: ResetPasswordFor
     } catch (error) {
       setMessage({ type: 'error', content: 'Error al actualizar la contraseña' })
     }
-  }
-
-  if (isVerifying) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="p-6 max-w-sm w-full bg-white rounded-xl shadow-lg">
-          <Logo />
-          <p className="text-center text-gray-600">Verificando token...</p>
-        </div>
-      </div>
-    )
   }
 
   return (
