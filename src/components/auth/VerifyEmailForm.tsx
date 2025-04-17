@@ -1,18 +1,16 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import Logo from '@/components/Logo'
 
-interface VerifyEmailFormProps {
-  token_hash: string
-  type: string
-  next: string
-}
-
-export default function VerifyEmailForm({ token_hash, type, next }: VerifyEmailFormProps) {
+export default function VerifyEmailForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const token_hash = searchParams.get('token_hash') || ''
+  const type = searchParams.get('type') || ''
+  const next = searchParams.get('next') || '/'
   const [error, setError] = useState<string | null>(null)
   
   useEffect(() => {

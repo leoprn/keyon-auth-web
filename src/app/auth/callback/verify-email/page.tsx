@@ -1,21 +1,17 @@
-import { Suspense } from 'react'
-import VerifyEmailFormWrapper from '@/components/auth/VerifyEmailFormWrapper'
+'use client'
 
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
+import dynamic from 'next/dynamic'
+import LoadingFallback from '@/components/LoadingFallback'
 
-const LoadingFallback = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="p-4 max-w-md w-full bg-white rounded-lg shadow">
-      <h1 className="text-2xl font-bold text-center mb-4">Cargando...</h1>
-    </div>
-  </div>
+// Cargamos el componente dinámicamente para evitar el pre-renderizado
+const VerifyEmailForm = dynamic(
+  () => import('@/components/auth/VerifyEmailForm'),
+  {
+    loading: () => <LoadingFallback />,
+    ssr: false, // Importante: no renderizar en el servidor
+  }
 )
 
-export default function VerifyEmail() {
-  return (
-    <Suspense fallback={<LoadingFallback />}>
-      <VerifyEmailFormWrapper />
-    </Suspense>
-  )
+export default function VerifyEmailPage() {
+  return <VerifyEmailForm />
 } 
