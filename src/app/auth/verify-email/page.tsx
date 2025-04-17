@@ -1,11 +1,29 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import Logo from '@/components/Logo'
 
-export default function VerifyEmailPage() {
+// Componente de carga para mostrar mientras suspendemos
+function LoadingFallback() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="p-8 max-w-md w-full bg-white rounded-lg shadow-md">
+        <div className="text-center mb-6">
+          <Logo />
+          <h1 className="text-2xl font-bold text-gray-800 mt-4">Verificación de Email</h1>
+        </div>
+        <div className="p-4 mb-4 rounded-lg text-sm bg-gray-100 text-gray-700">
+          Cargando...
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// Separar el contenido para envolverlo en Suspense
+function VerifyEmailContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const supabase = createClientComponentClient()
@@ -113,5 +131,14 @@ export default function VerifyEmailPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+// Componente principal que envuelve el contenido en Suspense
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <VerifyEmailContent />
+    </Suspense>
   )
 } 
