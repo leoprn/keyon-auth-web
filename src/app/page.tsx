@@ -1,13 +1,26 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import Logo from "@/components/Logo";
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function Home() {
+// Componente de carga para mostrar mientras suspendemos
+function LoadingFallback() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="p-8 max-w-md w-full bg-white rounded-lg shadow-md text-center">
+        <Logo className="h-12 w-auto mb-4" />
+        <p className="text-gray-700">Cargando...</p>
+      </div>
+    </div>
+  )
+}
+
+// Componente que utiliza useSearchParams
+function HomeContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const supabase = createClientComponentClient()
@@ -642,4 +655,13 @@ export default function Home() {
       </footer>
     </main>
   );
+}
+
+// Componente principal que envuelve el contenido en Suspense
+export default function Home() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <HomeContent />
+    </Suspense>
+  )
 }
