@@ -1,7 +1,11 @@
 // Mantenemos esta página como Server Component
 
 import { Suspense } from 'react'
-import ClientResetPassword from './ClientResetPassword' // Nuevo componente cliente
+// Usamos ruta absoluta para la importación
+import ClientResetPassword from '@/app/auth/callback/reset-password/ClientResetPassword'
+
+// Forzamos renderizado dinámico para esta página
+export const dynamic = 'force-dynamic';
 
 // Componente de carga
 function LoadingFallback() {
