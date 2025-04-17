@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import ResetPasswordForm from '@/components/auth/ResetPasswordForm'
+import ResetPasswordFormWrapper from '@/components/auth/ResetPasswordFormWrapper'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -15,7 +15,7 @@ const LoadingFallback = () => (
 export default function ResetPassword() {
   return (
     <Suspense fallback={<LoadingFallback />}>
-      <ResetPasswordForm />
+      <ResetPasswordFormWrapper />
     </Suspense>
   )
 } 
