@@ -1,10 +1,15 @@
 'use client'
 
 import Image from 'next/image'
+import { HTMLAttributes } from 'react'
 
-export default function Logo() {
+interface LogoProps extends HTMLAttributes<HTMLDivElement> {
+  className?: string;
+}
+
+export default function Logo({ className, ...props }: LogoProps) {
   return (
-    <div className="flex justify-center mb-6">
+    <div className={`flex justify-center ${className || ''}`} {...props}>
       <div className="relative w-[180px] h-[90px]">
         <Image
           src="/images/keyon-logo.png"

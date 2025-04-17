@@ -12,10 +12,12 @@ export async function GET(request: NextRequest) {
   const type = requestUrl.searchParams.get('type')
   const next = requestUrl.searchParams.get('next') ?? '/' // fallback a la raíz
 
+  // Log para depuración
+  console.log('Callback de verificación de email:', { token_hash, type, next })
+
   const redirectToError = (message: string) => {
-    const redirectUrl = new URL('/auth/verify-status', request.url)
-    redirectUrl.searchParams.set('status', 'error')
-    redirectUrl.searchParams.set('message', message)
+    const redirectUrl = new URL('/auth/verify-email', requestUrl.origin)
+    redirectUrl.searchParams.set('error', message)
     return NextResponse.redirect(redirectUrl.toString())
   }
 
@@ -24,24 +26,32 @@ export async function GET(request: NextRequest) {
       return redirectToError('Tipo de token inválido para verificación de email.')
     }
 
-    const supabase = createRouteHandlerClient({ cookies })
-    const { error } = await supabase.auth.verifyOtp({
-      type: type as 'email' | 'signup', // Aseguramos el tipo correcto
-      token_hash,
-    })
+    try {
+      const supabase = createRouteHandlerClient({ cookies })
+      
+      // Intentar verificar el token
+      const { error } = await supabase.auth.verifyOtp({
+        type: type as 'email' | 'signup', // Aseguramos el tipo correcto
+        token_hash,
+      })
 
-    if (!error) {
-      // Verificación exitosa, redirigir a 'next' o al dashboard
-      // Usamos una página de éxito intermedia para mostrar un mensaje antes de redirigir
-      const successUrl = new URL('/auth/verify-status', request.url)
-      successUrl.searchParams.set('status', 'success')
-      successUrl.searchParams.set('next', next) // Pasamos la URL final a la página de estado
-      return NextResponse.redirect(successUrl.toString())
+      if (!error) {
+        // Verificación exitosa, transferimos el control a la página de verificación
+        // que mostrará el éxito y opciones para el usuario
+        const successUrl = new URL('/auth/verify-email', requestUrl.origin)
+        successUrl.searchParams.set('token_hash', token_hash)
+        successUrl.searchParams.set('type', type)
+        successUrl.searchParams.set('next', next)
+        return NextResponse.redirect(successUrl.toString())
+      }
+
+      // Error al verificar
+      console.error('Error al verificar OTP:', error)
+      return redirectToError(error.message || 'Error al verificar el token.')
+    } catch (err) {
+      console.error('Error inesperado en callback de verificación:', err)
+      return redirectToError('Error inesperado al procesar la verificación.')
     }
-
-    // Error al verificar
-    console.error('Error al verificar OTP:', error)
-    return redirectToError(error.message || 'Error al verificar el token.')
   }
 
   // Si faltan parámetros

@@ -17,11 +17,14 @@ export async function GET(request: NextRequest) {
   console.log('[API Reset Callback] Código recibido:', code); 
 
   if (code) {
-    const supabase = createRouteHandlerClient({ cookies })
     try {
+      const supabase = createRouteHandlerClient({ cookies })
+      
       // Log antes de intercambiar el código
       console.log('[API Reset Callback] Intentando intercambiar código por sesión...');
+      
       await supabase.auth.exchangeCodeForSession(code)
+      
       // Log de éxito y redirección
       console.log('[API Reset Callback] Código intercambiado exitosamente. Redirigiendo a /auth/update-password');
       
@@ -31,6 +34,8 @@ export async function GET(request: NextRequest) {
     } catch (error) {
       // Log en caso de error durante el intercambio
       console.error('[API Reset Callback] Error al intercambiar código por sesión:', error);
+      
+      // Redirigir a la página de error con mensaje
       const redirectUrl = new URL('/auth/reset-status', requestUrl.origin);
       redirectUrl.searchParams.set('status', 'error');
       redirectUrl.searchParams.set('message', 'Error al validar el código de reseteo.');
@@ -40,8 +45,10 @@ export async function GET(request: NextRequest) {
 
   // Log si no se encontró código
   console.error('[API Reset Callback] No se encontró código en la solicitud.');
-  const redirectUrl = new URL('/auth/reset-status', request.url)
-  redirectUrl.searchParams.set('status', 'error')
-  redirectUrl.searchParams.set('message', 'No se proporcionó código de verificación a la API.')
-  return NextResponse.redirect(redirectUrl.toString())
+  
+  // Redirigir a la página de error por falta de código
+  const redirectUrl = new URL('/auth/reset-status', requestUrl.origin);
+  redirectUrl.searchParams.set('status', 'error');
+  redirectUrl.searchParams.set('message', 'No se proporcionó código de verificación a la API.');
+  return NextResponse.redirect(redirectUrl.toString());
 } 
