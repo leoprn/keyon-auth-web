@@ -21,10 +21,7 @@ export default function ResetPasswordForm() {
       console.error('Error al actualizar contraseña:', error)
       setMessage({ type: 'error', content: error.message || 'Error al actualizar la contraseña.' })
     } else {
-      setMessage({ type: 'success', content: 'Contraseña actualizada con éxito. Serás redirigido al inicio de sesión.' })
-      setTimeout(() => {
-        router.push('/auth/signin')
-      }, 3000)
+      setMessage({ type: 'success', content: '¡Contraseña actualizada con éxito!' })
     }
   }
 
@@ -38,29 +35,31 @@ export default function ResetPasswordForm() {
         </div>
       )}
 
-      <form onSubmit={handleUpdatePassword} className="space-y-4">
-        <div>
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-            Nueva Contraseña
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm text-black"
-            required
-            minLength={6}
-            placeholder="••••••••"
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out"
-        >
-          Actualizar Contraseña
-        </button>
-      </form>
+      {message?.type !== 'success' && (
+        <form onSubmit={handleUpdatePassword} className="space-y-4">
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              Nueva Contraseña
+            </label>
+            <input
+              type="password"
+              id="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm text-black"
+              required
+              minLength={6}
+              placeholder="••••••••"
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out"
+          >
+            Actualizar Contraseña
+          </button>
+        </form>
+      )}
     </>
   )
 } 
