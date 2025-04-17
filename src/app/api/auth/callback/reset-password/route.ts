@@ -7,22 +7,41 @@ import type { NextRequest } from 'next/server'
 export const dynamic = 'force-dynamic'
 
 export async function GET(request: NextRequest) {
+  // Log para saber que la ruta fue alcanzada
+  console.log('[API Reset Callback] Ruta alcanzada.'); 
+  
   const requestUrl = new URL(request.url)
   const code = requestUrl.searchParams.get('code') // Supabase usa 'code' para el flujo PKCE de recuperación
 
+  // Log para ver el código recibido
+  console.log('[API Reset Callback] Código recibido:', code); 
+
   if (code) {
     const supabase = createRouteHandlerClient({ cookies })
-    // Intercambiamos el código por una sesión
-    await supabase.auth.exchangeCodeForSession(code)
-    // Redirigimos al usuario a la página donde PUEDE cambiar la contraseña
-    // Esta página ahora estará protegida y tendrá acceso a la sesión del usuario
-    return NextResponse.redirect(new URL('/auth/update-password', request.url).toString())
+    try {
+      // Log antes de intercambiar el código
+      console.log('[API Reset Callback] Intentando intercambiar código por sesión...');
+      await supabase.auth.exchangeCodeForSession(code)
+      // Log de éxito y redirección
+      console.log('[API Reset Callback] Código intercambiado exitosamente. Redirigiendo a /auth/update-password');
+      
+      // Usar URL absoluta para la redirección
+      const redirectUrl = new URL('/auth/update-password', requestUrl.origin); 
+      return NextResponse.redirect(redirectUrl.toString())
+    } catch (error) {
+      // Log en caso de error durante el intercambio
+      console.error('[API Reset Callback] Error al intercambiar código por sesión:', error);
+      const redirectUrl = new URL('/auth/reset-status', requestUrl.origin);
+      redirectUrl.searchParams.set('status', 'error');
+      redirectUrl.searchParams.set('message', 'Error al validar el código de reseteo.');
+      return NextResponse.redirect(redirectUrl.toString());
+    }
   }
 
-  // Si no hay código, redirigir a una página de error
-  console.error('Callback de reseteo de contraseña invocado sin código.')
+  // Log si no se encontró código
+  console.error('[API Reset Callback] No se encontró código en la solicitud.');
   const redirectUrl = new URL('/auth/reset-status', request.url)
   redirectUrl.searchParams.set('status', 'error')
-  redirectUrl.searchParams.set('message', 'No se proporcionó código de verificación.')
+  redirectUrl.searchParams.set('message', 'No se proporcionó código de verificación a la API.')
   return NextResponse.redirect(redirectUrl.toString())
 } 
