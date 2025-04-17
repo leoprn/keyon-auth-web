@@ -19,7 +19,11 @@ export default function ResetPasswordForm() {
 
     if (error) {
       console.error('Error al actualizar contraseña:', error)
-      setMessage({ type: 'error', content: error.message || 'Error al actualizar la contraseña.' })
+      let errorMessage = error.message || 'Error al actualizar la contraseña.'
+      if (error.message === 'New password should be different from the old password.') {
+        errorMessage = 'La nueva contraseña debe ser diferente a la contraseña anterior.'
+      }
+      setMessage({ type: 'error', content: errorMessage })
     } else {
       setMessage({ type: 'success', content: '¡Contraseña actualizada con éxito!' })
     }
