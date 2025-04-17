@@ -80,7 +80,19 @@ function VerifyEmailContent() {
   }, [searchParams, supabase.auth])
 
   const handleOpenMobileApp = () => {
+    // Primero intentamos el formato para iOS
     window.location.href = 'keyon://login'
+    
+    // Establecemos un timeout para verificar si se pudo abrir la app
+    setTimeout(() => {
+      // Si seguimos en la misma página después de 500ms, intentamos con el formato para Android
+      window.location.href = 'keyonapp://login'
+      
+      // Si aún no funciona, intentamos un tercer formato
+      setTimeout(() => {
+        window.location.href = 'com.keyon.app://login'
+      }, 500)
+    }, 500)
   }
 
   return (
@@ -112,13 +124,25 @@ function VerifyEmailContent() {
         {message && !error && isMobile && (
           <div className="mt-6">
             <p className="text-sm text-gray-600 mb-3">
-              ¿Tienes la app de KeyOn instalada? Abrela directamente:
+              ¿Tienes la app de KeyOn instalada? Ábrela directamente:
             </p>
-            <button
-              onClick={handleOpenMobileApp}
-              className="w-full bg-indigo-700 text-white py-3 px-4 rounded-lg hover:bg-indigo-800 transition-colors text-center font-medium">
-              Abrir App KeyOn
-            </button>
+            <div className="space-y-2">
+              <a
+                href="keyon://login"
+                className="block w-full bg-indigo-700 text-white py-3 px-4 rounded-lg hover:bg-indigo-800 transition-colors text-center font-medium">
+                Abrir App KeyOn (Opción 1)
+              </a>
+              <a
+                href="keyonapp://login"
+                className="block w-full bg-purple-600 text-white py-3 px-4 rounded-lg hover:bg-purple-700 transition-colors text-center font-medium">
+                Abrir App KeyOn (Opción 2)
+              </a>
+              <a
+                href="com.keyon.app://login"
+                className="block w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors text-center font-medium">
+                Abrir App KeyOn (Opción 3)
+              </a>
+            </div>
           </div>
         )}
 
