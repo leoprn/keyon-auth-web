@@ -62,8 +62,8 @@ function HomeContent() {
           <Logo className="h-10 w-auto" />
           <div className="hidden md:flex items-center space-x-8">
             <div className="flex space-x-6">
-              <Link href="#caracteristicas" className="text-gray-700 hover:text-indigo-700 font-medium">
-                Características
+              <Link href="#como-funciona" className="text-gray-700 hover:text-indigo-700 font-medium">
+                Cómo Funciona
               </Link>
               <Link href="#beneficios" className="text-gray-700 hover:text-indigo-700 font-medium">
                 Beneficios
@@ -108,34 +108,29 @@ function HomeContent() {
         <div className="container mx-auto max-w-6xl flex flex-col lg:flex-row items-center gap-12 relative z-10">
           <div className="flex-1 text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Digitaliza y gestiona el control de accesos con KeyOn
+              Tu celular es tu <span className="text-indigo-700">llave digital universal</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0">
-              Automatiza los accesos, aumenta la seguridad y mejora la experiencia con una solución inteligente todo en uno.
+              Abrís la app, mostrás tu QR y accedés a barrios, oficinas, gimnasios, eventos y cualquier espacio. 
+              <strong className="text-gray-900">Un solo gesto, como pagar con el celular.</strong>
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              {/*
               <Link 
-                href="/auth/register" 
-                className="bg-indigo-700 hover:bg-indigo-800 text-white px-8 py-4 rounded-lg font-medium text-center transition-colors text-lg shadow-lg hover:shadow-xl">
-                Probar Gratis
-              </Link>
-              */}
-              <Link 
-                href="#contacto" 
+                href="#como-funciona" 
                 className="border border-indigo-700 text-indigo-700 hover:bg-indigo-50 px-8 py-4 rounded-lg font-medium text-center transition-colors text-lg">
-                Contactar un Asesor
+                Ver Cómo Funciona
               </Link>
             </div>
-            <p className="text-gray-500 text-sm mt-4">Implementación rápida y soporte 24/7</p>
+            <p className="text-gray-500 text-sm mt-4">Seguro como una operación bancaria • Compatible con todos los dispositivos</p>
           </div>
-          <div className="flex-1 relative">
-            <div className="relative w-full h-[400px] rounded-lg shadow-2xl overflow-hidden">
+          <div className="flex-1 relative flex justify-center items-center">
+            <div className="relative max-w-md w-full">
               <Image
-                src="/images/dashboard-example.png"
+                src="https://yulkmmjwjvoavpbteoxg.supabase.co/storage/v1/object/public/assets//keyOn_1.png"
                 alt="Dashboard KeyOn"
-                fill
-                className="object-cover"
+                width={400}
+                height={300}
+                className="w-full h-auto rounded-lg shadow-2xl"
                 priority
               />
             </div>
@@ -146,105 +141,126 @@ function HomeContent() {
         </div>
       </section>
 
-      {/* Banner de confianza */}
-      <section className="bg-gray-50 py-6 border-y border-gray-200">
-        <div className="container mx-auto max-w-6xl text-center">
-          <p className="text-gray-700 font-medium">
-            Confían en nosotros empresas de todos los tamaños
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 mt-6 opacity-60">
-            <div className="h-8 w-auto">
-              <div className="h-full w-20 bg-gray-400 rounded"></div>
-            </div>
-            <div className="h-8 w-auto">
-              <div className="h-full w-24 bg-gray-400 rounded"></div>
-            </div>
-            <div className="h-8 w-auto">
-              <div className="h-full w-16 bg-gray-400 rounded"></div>
-            </div>
-            <div className="h-8 w-auto">
-              <div className="h-full w-28 bg-gray-400 rounded"></div>
-            </div>
-            <div className="h-8 w-auto">
-              <div className="h-full w-20 bg-gray-400 rounded"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Sección de características principales */}
-      <section id="caracteristicas" className="py-20 px-4 relative overflow-hidden">
+      <section id="como-funciona" className="py-20 px-4 relative overflow-hidden">
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-indigo-50 rounded-full opacity-70 -mr-40 -mb-40"></div>
         <div className="absolute top-20 left-0 w-64 h-64 bg-indigo-50 rounded-full opacity-70 -ml-32"></div>
         
         <div className="container mx-auto max-w-6xl relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Optimiza tu gestión de accesos
+              Simple para usuarios, poderoso para administradores
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Facilita tus tareas con herramientas integradas para registro, control y monitoreo de accesos sin complicaciones.
+              KeyOn detecta automáticamente a qué lugares tenés acceso. No necesitás buscar permisos ni validar manualmente.
             </p>
           </div>
           
           <div className="flex flex-col lg:flex-row gap-12 items-center mb-24">
             <div className="flex-1">
-              <div className="relative w-full h-[400px] rounded-xl shadow-xl overflow-hidden">
+              <div className="relative w-full h-[400px] rounded-xl shadow-xl overflow-hidden bg-gray-50">
                 <Image
-                  src="/images/control-panel.png"
+                  src="https://yulkmmjwjvoavpbteoxg.supabase.co/storage/v1/object/public/assets//keyOn_users.jpeg"
                   alt="Panel de control KeyOn"
                   fill
                   className="object-cover"
+                  priority
                 />
               </div>
             </div>
             <div className="flex-1">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                Una plataforma diseñada para tu tranquilidad y seguridad
+                Para usuarios: Acceso con un QR
               </h3>
               <p className="text-gray-600 mb-8">
-                Simplifica la seguridad y los procesos de tu negocio con un ecosistema digital que te brinda la información y el control que necesitas.
+                Abrís la app KeyOn y mostrás tu código QR. El sistema detecta automáticamente si podés acceder a ese barrio, oficina, gimnasio o evento. Es tan simple como pagar con el celular.
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
+                    <span className="text-indigo-700 font-bold">1</span>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900">Control en tiempo real</h4>
-                    <p className="text-gray-600">Monitorea todos los accesos desde cualquier lugar y en todo momento.</p>
+                    <h4 className="font-semibold text-gray-900">Abrís la app</h4>
+                    <p className="text-gray-600">Un toque en tu pantalla de inicio</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
+                    <span className="text-indigo-700 font-bold">2</span>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900">Seguridad avanzada</h4>
-                    <p className="text-gray-600">Tecnología biométrica y cifrado de datos para la máxima protección.</p>
+                    <h4 className="font-semibold text-gray-900">Mostrás tu QR</h4>
+                    <p className="text-gray-600">Tu código único aparece automáticamente</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                    </svg>
+                    <span className="text-indigo-700 font-bold">3</span>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900">Reportes detallados</h4>
-                    <p className="text-gray-600">Análisis y estadísticas para tomar mejores decisiones basadas en datos.</p>
+                    <h4 className="font-semibold text-gray-900">Accedés</h4>
+                    <p className="text-gray-600">El sistema valida y autoriza tu ingreso</p>
                   </div>
                 </div>
               </div>
-              <Link
-                href="#contacto"
-                className="inline-block mt-8 bg-indigo-700 hover:bg-indigo-800 text-white px-6 py-3 rounded-lg font-medium transition-colors">
-                Solicitar demostración
-              </Link>
+            </div>
+          </div>
+
+          <div className="flex flex-col lg:flex-row-reverse gap-12 items-center">
+            <div className="flex-1">
+              <div className="relative w-full h-[400px] rounded-xl shadow-xl overflow-hidden bg-gray-50">
+                <Image
+                  src="https://yulkmmjwjvoavpbteoxg.supabase.co/storage/v1/object/public/assets//key_admin.png"
+                  alt="Panel administrativo KeyOn"
+                  fill
+                  className="object-contain p-2"
+                  priority
+                />
+              </div>
+            </div>
+            <div className="flex-1">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                Para administradores: Fácil como WhatsApp
+              </h3>
+              <p className="text-gray-600 mb-8">
+                Gestionás accesos como si fueran grupos de WhatsApp: agregás personas, definís horarios, asignás permisos. Todo desde tu celular con trazabilidad completa.
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Agregás y quitás personas</h4>
+                    <p className="text-gray-600">Como en un grupo de chat, pero para accesos físicos</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Definís horarios y permisos</h4>
+                    <p className="text-gray-600">Control granular de cuándo y dónde pueden acceder</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Trazabilidad completa</h4>
+                    <p className="text-gray-600">Registro de cada acceso con fecha, hora y ubicación</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -255,10 +271,11 @@ function HomeContent() {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Beneficios que transforman tu negocio
+              Tecnología, seguridad y fluidez urbana
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Un ecosistema completo diseñado para simplificar la gestión de accesos y mejorar la seguridad.
+              Compatible con cerraduras electrónicas, barreras, molinetes y sistemas existentes. 
+              Un paso hacia la ciudad inteligente.
             </p>
           </div>
           
@@ -267,12 +284,12 @@ function HomeContent() {
             <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
               <div className="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Control de Acceso Inteligente</h3>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">Una única identidad digital</h3>
               <p className="text-gray-600">
-                Gestiona quién entra y sale con códigos QR temporales. Registros automáticos en tiempo real.
+                Tu celular se convierte en tu llave universal. Un solo QR para acceder a barrios, oficinas, gimnasios, eventos y más.
               </p>
             </div>
             
@@ -280,12 +297,12 @@ function HomeContent() {
             <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
               <div className="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Notificaciones y Alertas</h3>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">Seguro como el banco</h3>
               <p className="text-gray-600">
-                Recibe notificaciones instantáneas de cada acceso. Configura alertas para eventos específicos y previene accesos no autorizados.
+                Tecnología de cifrado bancario, autenticación biométrica y protocolos de seguridad de nivel empresarial.
               </p>
             </div>
             
@@ -293,12 +310,12 @@ function HomeContent() {
             <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
               <div className="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Aplicación Móvil</h3>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">Compatible con todo</h3>
               <p className="text-gray-600">
-                Gestiona todo desde tu smartphone. Monitorea actividad y recibe notificaciones al instante.
+                Funciona con cerraduras electrónicas, barreras, molinetes y cualquier sistema de acceso existente gracias a nuestras integraciones IoT.
               </p>
             </div>
             
@@ -306,12 +323,12 @@ function HomeContent() {
             <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
               <div className="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Estadísticas y Reportes</h3>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">Gestión como WhatsApp</h3>
               <p className="text-gray-600">
-                Analiza patrones de acceso, crea informes personalizados y exporta datos para una mejor gestión y cumplimiento.
+                Administrá permisos de acceso tan fácil como gestionar un grupo de chat. Agregás, quitás, definís horarios desde tu celular.
               </p>
             </div>
             
@@ -319,12 +336,12 @@ function HomeContent() {
             <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
               <div className="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Gestión de Usuarios</h3>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">Visión de ciudad inteligente</h3>
               <p className="text-gray-600">
-                Administra fácilmente permisos y niveles de acceso. Asigna roles específicos a cada persona según sus necesidades.
+                Imaginate un futuro donde mostrás un QR para peajes, transporte público, hospitales. KeyOn es el primer paso hacia esa realidad.
               </p>
             </div>
             
@@ -332,12 +349,12 @@ function HomeContent() {
             <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
               <div className="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Integración Total</h3>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">Detección automática</h3>
               <p className="text-gray-600">
-                Conecta con tus sistemas existentes, desde cerraduras inteligentes hasta software de gestión empresarial.
+                No necesitás buscar permisos ni validar manualmente. KeyOn detecta automáticamente a qué lugares tenés autorización de acceso.
               </p>
             </div>
           </div>
@@ -348,18 +365,24 @@ function HomeContent() {
       <section className="py-16 bg-indigo-700 text-white text-center">
         <div className="container mx-auto max-w-4xl px-4">
           <h2 className="text-3xl font-bold mb-6">
-            Usa KeyOn 90 días y si no cumple tus expectativas, te devolvemos el 100% del pago.
+            Comenzá gratis y escalá cuando necesites más
           </h2>
           <p className="text-indigo-100 mb-8 text-lg">
-            Sin compromisos, sin riesgos. Queremos que estés completamente satisfecho.
+            Modelo freemium: empezás sin costo y solo pagás cuando tu negocio crece. 
+            La aplicación ya está lista para pruebas piloto.
           </p>
-          {/*
-          <Link
-            href="/auth/register"
-            className="inline-block bg-white text-indigo-700 hover:bg-indigo-50 px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg">
-            Comenzar Prueba Gratuita
-          </Link>
-          */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="#contacto"
+              className="inline-block bg-white text-indigo-700 hover:bg-indigo-50 px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg">
+              Solicitar Prueba Piloto
+            </Link>
+            <Link
+              href="#contacto"
+              className="inline-block border border-white text-white hover:bg-white hover:text-indigo-700 px-8 py-4 rounded-lg font-bold text-lg transition-colors">
+              Hablar con un Asesor
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -601,7 +624,7 @@ function HomeContent() {
                 </div>
               </div>
               <p className="text-gray-400 mb-6">
-                Transformando la gestión de acceso con tecnología inteligente
+                KeyOn es tecnología, seguridad y fluidez urbana. Tu llave digital hacia la ciudad inteligente.
               </p>
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-400 hover:text-white">
@@ -624,10 +647,10 @@ function HomeContent() {
             <div>
               <h3 className="text-lg font-semibold mb-6">Producto</h3>
               <ul className="space-y-4">
-                <li><Link href="#caracteristicas" className="text-gray-400 hover:text-white transition-colors">Características</Link></li>
+                <li><Link href="#como-funciona" className="text-gray-400 hover:text-white transition-colors">Cómo Funciona</Link></li>
                 <li><Link href="#beneficios" className="text-gray-400 hover:text-white transition-colors">Beneficios</Link></li>
                 <li><Link href="#precios" className="text-gray-400 hover:text-white transition-colors">Precios</Link></li>
-                <li><Link href="#" className="text-gray-400 hover:text-white transition-colors">Demo</Link></li>
+                <li><Link href="#contacto" className="text-gray-400 hover:text-white transition-colors">Demo</Link></li>
               </ul>
             </div>
             <div>

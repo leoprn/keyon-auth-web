@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Configuración de imágenes externas
+  images: {
+    domains: ['yulkmmjwjvoavpbteoxg.supabase.co'],
+  },
   // Configuración experimental para Next.js
   experimental: {
     // Habilita las Server Actions
