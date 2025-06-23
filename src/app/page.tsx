@@ -7,6 +7,9 @@ import Logo from "@/components/Logo";
 import Link from 'next/link';
 import Image from 'next/image';
 
+// Forzar renderizado dinámico
+export const dynamic = 'force-dynamic'
+
 // Componente de carga para mostrar mientras suspendemos
 function LoadingFallback() {
   return (

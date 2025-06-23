@@ -14,8 +14,6 @@ const nextConfig = {
   },
   // Configuración para deshabilitar la generación estática/SSR en ciertas páginas
   skipTrailingSlashRedirect: true,
-  // Deshabilitamos la compilación en tiempo de construcción para las páginas de callback
-  output: 'standalone',
   trailingSlash: false,
   // Configuración para ignorar errores de ESLint en producción
   eslint: {
