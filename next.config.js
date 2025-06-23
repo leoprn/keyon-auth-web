@@ -23,6 +23,12 @@ const nextConfig = {
     // Ignorar errores de TypeScript en producción
     ignoreBuildErrors: true,
   },
+  // Forzar runtime para todos los archivos
+  runtime: 'nodejs',
+  // Configuración adicional para Vercel
+  env: {
+    SKIP_ENV_VALIDATION: 'true'
+  }
 };
 
 module.exports = nextConfig; 
