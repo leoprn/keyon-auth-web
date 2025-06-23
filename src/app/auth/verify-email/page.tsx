@@ -5,6 +5,9 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import Logo from '@/components/Logo'
 
+// Forzar renderizado dinámico
+export const dynamic = 'force-dynamic'
+
 // Componente de carga para mostrar mientras suspendemos
 function LoadingFallback() {
   return (

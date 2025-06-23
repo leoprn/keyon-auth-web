@@ -4,6 +4,9 @@ import { Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Logo from '@/components/Logo'
 
+// Forzar renderizado dinámico
+export const dynamic = 'force-dynamic'
+
 // Componente real que usa useSearchParams
 function ResetStatusContent() {
   const searchParams = useSearchParams()

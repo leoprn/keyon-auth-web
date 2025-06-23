@@ -6,6 +6,9 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import ResetPasswordForm from '@/components/auth/ResetPasswordForm'
 import Logo from '@/components/Logo'
 
+// Forzar renderizado dinámico
+export const dynamic = 'force-dynamic'
+
 // Componente de carga simple
 function LoadingFallback() {
   return (
