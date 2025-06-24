@@ -71,9 +71,6 @@ function HomeContent() {
               <Link href="#beneficios" className="text-gray-700 hover:text-indigo-700 font-medium">
                 Beneficios
               </Link>
-              <Link href="#precios" className="text-gray-700 hover:text-indigo-700 font-medium">
-                Planes
-              </Link>
               <Link href="#contacto" className="text-gray-700 hover:text-indigo-700 font-medium">
                 Contacto
               </Link>
@@ -107,33 +104,33 @@ function HomeContent() {
       <div className="absolute bottom-48 left-0 w-96 h-96 bg-indigo-100 rounded-full opacity-20 -ml-48 z-0"></div>
 
       {/* Header / Hero */}
-      <section className="relative py-20 px-4 overflow-hidden">
-        <div className="container mx-auto max-w-6xl flex flex-col lg:flex-row items-center gap-12 relative z-10">
+      <section className="relative py-20 px-4 overflow-hidden bg-white">
+        <div className="container mx-auto max-w-4xl flex flex-col lg:flex-row items-center gap-12 relative z-10 px-8 lg:px-16">
           <div className="flex-1 text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               Tu celular es tu <span className="text-indigo-700">llave digital universal</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0">
+            <p className="text-xl text-gray-500 mb-8 max-w-xl mx-auto lg:mx-0">
               Abrís la app, mostrás tu QR y accedés a barrios, oficinas, gimnasios, eventos y cualquier espacio. 
               <strong className="text-gray-900">Un solo gesto, como pagar con el celular.</strong>
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link 
                 href="#como-funciona" 
-                className="border border-indigo-700 text-indigo-700 hover:bg-indigo-50 px-8 py-4 rounded-lg font-medium text-center transition-colors text-lg">
+                className="border border-indigo-700 text-indigo-700 hover:bg-indigo-50 px-8 py-4 rounded-xl font-semibold text-center transition-colors text-lg shadow-sm">
                 Ver Cómo Funciona
               </Link>
             </div>
-            <p className="text-gray-500 text-sm mt-4">Seguro como una operación bancaria • Compatible con todos los dispositivos</p>
+            <p className="text-gray-400 text-sm mt-4">Seguro como una operación bancaria • Compatible con todos los dispositivos</p>
           </div>
           <div className="flex-1 relative flex justify-center items-center">
-            <div className="relative max-w-md w-full">
+            <div className="w-full max-w-md mx-auto">
               <Image
-                src="https://yulkmmjwjvoavpbteoxg.supabase.co/storage/v1/object/public/assets//keyOn_1.png"
+                src="/images/keyOn.png"
                 alt="Dashboard KeyOn"
                 width={400}
                 height={300}
-                className="w-full h-auto rounded-lg shadow-2xl"
+                className="rounded-lg shadow-2xl object-cover w-full h-auto"
                 priority
               />
             </div>
@@ -162,13 +159,16 @@ function HomeContent() {
           <div className="flex flex-col lg:flex-row gap-12 items-center mb-24">
             <div className="flex-1">
               <div className="relative w-full h-[400px] rounded-xl shadow-xl overflow-hidden bg-gray-50">
-                <Image
-                  src="https://yulkmmjwjvoavpbteoxg.supabase.co/storage/v1/object/public/assets//keyOn_users.jpeg"
-                  alt="Panel de control KeyOn"
-                  fill
-                  className="object-cover"
-                  priority
-                />
+                <div className="w-full max-w-md mx-auto">
+                  <Image
+                    src="/images/keyOn_users.jpeg"
+                    alt="Panel de control KeyOn"
+                    width={400}
+                    height={300}
+                    className="rounded-xl shadow-xl object-cover w-full h-auto bg-gray-50"
+                    priority
+                  />
+                </div>
               </div>
             </div>
             <div className="flex-1">
@@ -213,13 +213,16 @@ function HomeContent() {
           <div className="flex flex-col lg:flex-row-reverse gap-12 items-center">
             <div className="flex-1">
               <div className="relative w-full h-[400px] rounded-xl shadow-xl overflow-hidden bg-gray-50">
-                <Image
-                  src="https://yulkmmjwjvoavpbteoxg.supabase.co/storage/v1/object/public/assets//key_admin.png"
-                  alt="Panel administrativo KeyOn"
-                  fill
-                  className="object-contain p-2"
-                  priority
-                />
+                <div className="w-full max-w-md mx-auto">
+                  <Image
+                    src="/images/key_admin.png"
+                    alt="Panel administrativo KeyOn"
+                    width={400}
+                    height={300}
+                    className="rounded-xl shadow-xl object-contain p-2 w-full h-auto bg-gray-50"
+                    priority
+                  />
+                </div>
               </div>
             </div>
             <div className="flex-1">
@@ -270,93 +273,76 @@ function HomeContent() {
       </section>
 
       {/* Sección de beneficios */}
-      <section id="beneficios" className="py-20 px-4 bg-gray-50">
-        <div className="container mx-auto max-w-6xl">
+      <section id="beneficios" className="py-20 px-4 bg-[#fafafa]">
+        <div className="container mx-auto max-w-4xl px-8 lg:px-16">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Tecnología, seguridad y fluidez urbana
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-500 max-w-2xl mx-auto">
               Compatible con cerraduras electrónicas, barreras, molinetes y sistemas existentes. 
               Un paso hacia la ciudad inteligente.
             </p>
           </div>
-          
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Tarjeta 1 */}
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+            <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-200 flex flex-col items-start gap-4">
+              <div className="w-14 h-14 bg-indigo-50 rounded-xl flex items-center justify-center mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Una única identidad digital</h3>
-              <p className="text-gray-600">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900">Una única identidad digital</h3>
+              <p className="text-gray-500">
                 Tu celular se convierte en tu llave universal. Un solo QR para acceder a barrios, oficinas, gimnasios, eventos y más.
               </p>
             </div>
-            
             {/* Tarjeta 2 */}
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+            <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-200 flex flex-col items-start gap-4">
+              <div className="w-14 h-14 bg-indigo-50 rounded-xl flex items-center justify-center mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Seguro como el banco</h3>
-              <p className="text-gray-600">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900">Seguro como el banco</h3>
+              <p className="text-gray-500">
                 Tecnología de cifrado bancario, autenticación biométrica y protocolos de seguridad de nivel empresarial.
               </p>
             </div>
-            
             {/* Tarjeta 3 */}
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+            <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-200 flex flex-col items-start gap-4">
+              <div className="w-14 h-14 bg-indigo-50 rounded-xl flex items-center justify-center mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Compatible con todo</h3>
-              <p className="text-gray-600">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900">Compatible con todo</h3>
+              <p className="text-gray-500">
                 Funciona con cerraduras electrónicas, barreras, molinetes y cualquier sistema de acceso existente gracias a nuestras integraciones IoT.
               </p>
             </div>
-            
             {/* Tarjeta 4 */}
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+            <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-200 flex flex-col items-start gap-4">
+              <div className="w-14 h-14 bg-indigo-50 rounded-xl flex items-center justify-center mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Gestión como WhatsApp</h3>
-              <p className="text-gray-600">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900">Gestión como WhatsApp</h3>
+              <p className="text-gray-500">
                 Administrá permisos de acceso tan fácil como gestionar un grupo de chat. Agregás, quitás, definís horarios desde tu celular.
               </p>
             </div>
-            
-            {/* Tarjeta 5 */}
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Visión de ciudad inteligente</h3>
-              <p className="text-gray-600">
-                Imaginate un futuro donde mostrás un QR para peajes, transporte público, hospitales. KeyOn es el primer paso hacia esa realidad.
-              </p>
-            </div>
-            
+
             {/* Tarjeta 6 */}
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+            <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-200 flex flex-col items-start gap-4">
+              <div className="w-14 h-14 bg-indigo-50 rounded-xl flex items-center justify-center mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Detección automática</h3>
-              <p className="text-gray-600">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900">Detección automática</h3>
+              <p className="text-gray-500">
                 No necesitás buscar permisos ni validar manualmente. KeyOn detecta automáticamente a qué lugares tenés autorización de acceso.
               </p>
             </div>
@@ -364,253 +350,182 @@ function HomeContent() {
         </div>
       </section>
 
-      {/* Sección de prueba gratuita / garantía */}
-      <section className="py-16 bg-indigo-700 text-white text-center">
-        <div className="container mx-auto max-w-4xl px-4">
-          <h2 className="text-3xl font-bold mb-6">
-            Comenzá gratis y escalá cuando necesites más
-          </h2>
-          <p className="text-indigo-100 mb-8 text-lg">
-            Modelo freemium: empezás sin costo y solo pagás cuando tu negocio crece. 
-            La aplicación ya está lista para pruebas piloto.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="#contacto"
-              className="inline-block bg-white text-indigo-700 hover:bg-indigo-50 px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg">
-              Solicitar Prueba Piloto
-            </Link>
-            <Link
-              href="#contacto"
-              className="inline-block border border-white text-white hover:bg-white hover:text-indigo-700 px-8 py-4 rounded-lg font-bold text-lg transition-colors">
-              Hablar con un Asesor
-            </Link>
+      {/* Sección de visión futurista */}
+      <section className="py-20 px-4 bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-700 relative overflow-hidden">
+        {/* Elementos decorativos de fondo */}
+        <div className="absolute inset-0 bg-black bg-opacity-10"></div>
+        <div className="absolute top-0 left-0 w-96 h-96 bg-white bg-opacity-10 rounded-full -translate-x-48 -translate-y-48"></div>
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-white bg-opacity-10 rounded-full translate-x-40 translate-y-40"></div>
+        
+        <div className="container mx-auto max-w-4xl px-8 lg:px-16 relative z-10">
+          <div className="text-center">
+            <div className="inline-flex items-center px-4 py-2 bg-white bg-opacity-20 rounded-full text-indigo-700 text-sm font-semibold mb-8 backdrop-blur-sm border border-white border-opacity-20">
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              El futuro está aquí
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold !text-white mb-8 leading-tight drop-shadow-lg">
+              Visión de <span className="!text-white">ciudad inteligente</span>
+            </h2>
+            
+            <p className="text-xl md:text-2xl !text-white mb-12 max-w-4xl mx-auto leading-relaxed font-light drop-shadow-md">
+              Imaginate un futuro donde mostrás un QR para peajes, transporte público, hospitales. 
+              <strong className="!text-white font-semibold">KeyOn es el primer paso hacia esa realidad.</strong>
+            </p>
+            
+                         {/* Grid de iconos futuristas */}
+             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
+               <div className="text-center">
+                 <div className="w-16 h-16 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border border-white border-opacity-20">
+                   <svg className="w-8 h-8 text-indigo-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                   </svg>
+                 </div>
+                 <p className="!text-white text-sm font-semibold drop-shadow-md">Peajes automáticos</p>
+               </div>
+               
+               <div className="text-center">
+                 <div className="w-16 h-16 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border border-white border-opacity-20">
+                   <svg className="w-8 h-8 text-indigo-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
+                   </svg>
+                 </div>
+                 <p className="!text-white text-sm font-semibold drop-shadow-md">Transporte público</p>
+               </div>
+               
+               <div className="text-center">
+                 <div className="w-16 h-16 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border border-white border-opacity-20">
+                   <svg className="w-8 h-8 text-indigo-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                   </svg>
+                 </div>
+                 <p className="!text-white text-sm font-semibold drop-shadow-md">Servicios de salud</p>
+               </div>
+               
+               <div className="text-center">
+                 <div className="w-16 h-16 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border border-white border-opacity-20">
+                   <svg className="w-8 h-8 text-indigo-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                   </svg>
+                 </div>
+                 <p className="!text-white text-sm font-semibold drop-shadow-md">Servicios municipales</p>
+               </div>
+             </div>
           </div>
         </div>
       </section>
 
-      {/* Sección de planes */}
-      <section id="precios" className="py-20 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Planes flexibles para cada necesidad
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Elige el plan que mejor se adapte a las necesidades de tu negocio.
-            </p>
-          </div>
-          
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Plan Básico */}
-            <div className="flex-1 bg-white p-8 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-              <div className="text-center pb-8 border-b border-gray-100">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Plan Básico</h3>
-                <p className="text-gray-600 mb-6">Ideal para negocios pequeños</p>
-                <div className="text-4xl font-bold text-indigo-700 mb-1">$1000</div>
-                <p className="text-gray-500 text-sm">por año</p>
-              </div>
-              <ul className="mt-8 space-y-4">
-                <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700">Control de accesos</span>
-                </li>
-                <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700">App móvil</span>
-                </li>
-                <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700">Reportes básicos</span>
-                </li>
-                <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700">Soporte técnico 8/5</span>
-                </li>
-              </ul>
-              <div className="mt-8 text-center">
-                <Link href="#contacto" className="inline-block w-full py-3 px-6 rounded-lg border border-indigo-700 text-indigo-700 hover:bg-indigo-50 transition-colors font-medium">
-                  Contactar
-                </Link>
-              </div>
-            </div>
-            
-            {/* Plan Professional */}
-            <div className="flex-1 bg-indigo-700 p-8 rounded-xl shadow-2xl relative">
-              <div className="absolute top-0 right-0 bg-yellow-400 text-xs font-bold uppercase py-1 px-2 -mt-2 rounded">Popular</div>
-              <div className="text-center pb-8 border-b border-indigo-600">
-                <h3 className="text-xl font-bold text-white mb-2">Plan Professional</h3>
-                <p className="text-indigo-200 mb-6">Ideal para medianas empresas</p>
-                <div className="text-4xl font-bold text-white mb-1">$1490</div>
-                <p className="text-indigo-200 text-sm">por año</p>
-              </div>
-              <ul className="mt-8 space-y-4">
-                <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-300 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-white">Todo lo del Plan Básico</span>
-                </li>
-                <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-300 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-white">Reportes avanzados</span>
-                </li>
-                <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-300 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-white">Integraciones</span>
-                </li>
-                <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-300 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-white">Soporte técnico 24/7</span>
-                </li>
-              </ul>
-              <div className="mt-8 text-center">
-                <Link href="#contacto" className="inline-block w-full py-3 px-6 rounded-lg bg-white text-indigo-700 hover:bg-indigo-50 transition-colors font-medium shadow-md">
-                  Contactar
-                </Link>
-              </div>
-            </div>
-            
-            {/* Plan Enterprise */}
-            <div className="flex-1 bg-white p-8 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-              <div className="text-center pb-8 border-b border-gray-100">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Plan Enterprise</h3>
-                <p className="text-gray-600 mb-6">Para grandes organizaciones</p>
-                <div className="text-4xl font-bold text-indigo-700 mb-1">Personalizado</div>
-                <p className="text-gray-500 text-sm">contacta para más detalles</p>
-              </div>
-              <ul className="mt-8 space-y-4">
-                <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700">Todo lo del Plan Professional</span>
-                </li>
-                <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700">API personalizada</span>
-                </li>
-                <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700">Personalización completa</span>
-                </li>
-                <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700">Gerente de cuenta dedicado</span>
-                </li>
-              </ul>
-              <div className="mt-8 text-center">
-                <Link href="#contacto" className="inline-block w-full py-3 px-6 rounded-lg border border-indigo-700 text-indigo-700 hover:bg-indigo-50 transition-colors font-medium">
-                  Contactar
-                </Link>
-              </div>
-            </div>
-          </div>
+      {/* Sección de llamada a la acción / gratuita */}
+      <section className="py-16 flex justify-center bg-[#fafafa]">
+        <div className="w-full max-w-2xl bg-white rounded-3xl shadow-lg px-10 py-12 text-center border border-gray-200 font-sans">
+          <h2 className="text-4xl font-bold mb-4 text-gray-900 tracking-tight">
+            Accedé gratis
+          </h2>
+          <p className="text-lg text-gray-500 mb-10 font-normal">
+            KeyOn es una aplicación abierta y gratuita para todos los usuarios. Disfrutá de todas las funcionalidades sin costo.<br/>
+            Si sos una empresa y querés promocionar tus servicios o productos dentro de la app, contactanos para conocer nuestras opciones de publicidad.
+          </p>
+          <a
+            href="#"
+            className="inline-block px-8 py-4 rounded-xl border border-indigo-700 text-indigo-700 font-semibold text-lg bg-white hover:bg-indigo-50 transition-colors shadow-sm"
+          >
+            Descargar KeyOn
+          </a>
         </div>
       </section>
 
       {/* Sección de contacto */}
-      <section id="contacto" className="py-20 px-4 bg-gray-50">
-        <div className="container mx-auto max-w-6xl">
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-            <div className="flex flex-col md:flex-row">
-              <div className="md:w-1/2 bg-indigo-700 text-white p-12">
-                <h2 className="text-3xl font-bold mb-6">Contáctanos</h2>
-                <p className="text-indigo-100 mb-8">
-                  Nuestro equipo está listo para responder tus dudas y ayudarte a encontrar la mejor solución para tu negocio.
-                </p>
-                <div className="space-y-6">
-                  <div className="flex items-start">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3 text-indigo-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <section id="contacto" className="py-20 px-4 bg-[#fafafa]">
+        <div className="container mx-auto max-w-4xl px-8 lg:px-16">
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 flex flex-col md:flex-row">
+            <div className="md:w-1/2 bg-indigo-700 p-12 flex flex-col justify-center rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+              <h2 className="text-3xl font-bold mb-6 !text-white">Contáctanos</h2>
+              <p className="!text-white mb-8 text-lg font-medium">
+                Nuestro equipo está listo para responder tus dudas y ayudarte a encontrar la mejor solución para tu negocio.
+              </p>
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
-                    <div>
-                      <h3 className="font-semibold text-lg">Email</h3>
-                      <p className="text-indigo-200">info@keyon.com</p>
-                    </div>
+                  </span>
+                  <div>
+                    <h3 className="font-semibold text-lg !text-white">Email</h3>
+                    <p className="!text-white font-medium">info@keyon.com</p>
                   </div>
-                  <div className="flex items-start">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3 text-indigo-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                </div>
+                <div className="flex items-start gap-4">
+                  <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
-                    <div>
-                      <h3 className="font-semibold text-lg">Teléfono</h3>
-                      <p className="text-indigo-200">+123 456 7890</p>
-                    </div>
+                  </span>
+                  <div>
+                    <h3 className="font-semibold text-lg !text-white">Teléfonos</h3>
+                    <p className="!text-white font-medium">+54 9 261 538 1131</p>
+                    <p className="!text-white font-medium">+54 9 261 614 3039</p>
                   </div>
-                  <div className="flex items-start">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3 text-indigo-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                </div>
+                <div className="flex items-start gap-4">
+                  <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <div>
-                      <h3 className="font-semibold text-lg">Oficinas</h3>
-                      <p className="text-indigo-200">Argentina - Uruguay - España - USA</p>
-                    </div>
+                  </span>
+                  <div>
+                    <h3 className="font-semibold text-lg !text-white">Oficina</h3>
+                    <p className="!text-white font-medium">9 de Julio 500, Ciudad de Mendoza</p>
                   </div>
                 </div>
               </div>
-              <div className="md:w-1/2 p-12">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Solicita información</h3>
-                <form className="space-y-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                      Nombre completo
-                    </label>
-                    <input
-                      id="name"
-                      type="text"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                      Email
-                    </label>
-                    <input
-                      id="email"
-                      type="email"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                      Mensaje
-                    </label>
-                    <textarea
-                      id="message"
-                      rows={4}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
-                    ></textarea>
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-indigo-700 hover:bg-indigo-800 text-white py-3 px-6 rounded-lg font-medium transition-colors shadow-md"
-                  >
-                    Enviar mensaje
-                  </button>
-                </form>
-              </div>
+            </div>
+            <div className="md:w-1/2 p-12 flex flex-col justify-center bg-gray-50">
+              <h3 className="text-2xl font-bold text-gray-900 mb-8">Solicita información</h3>
+              <form className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Nombre completo
+                  </label>
+                  <input
+                    id="name"
+                    type="text"
+                    placeholder="Ingresá tu nombre completo"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white transition-all duration-200 hover:border-gray-400 text-base shadow-sm"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    placeholder="tu@email.com"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white transition-all duration-200 hover:border-gray-400 text-base shadow-sm"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Mensaje
+                  </label>
+                  <textarea
+                    id="message"
+                    rows={4}
+                    placeholder="Contanos cómo podemos ayudarte..."
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white transition-all duration-200 hover:border-gray-400 text-base resize-none shadow-sm"
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-indigo-700 hover:bg-indigo-800 text-white py-3 px-6 rounded-lg font-semibold text-base transition-all duration-200 shadow-md"
+                >
+                  Enviar mensaje
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -619,7 +534,7 @@ function HomeContent() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-16 px-4">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             <div>
               <div className="flex items-center justify-center md:justify-start mb-6">
                 <div className="bg-white p-2 rounded-xl">
@@ -648,29 +563,20 @@ function HomeContent() {
               </div>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-6">Producto</h3>
+              <h3 className="text-lg font-semibold mb-6">Navegación</h3>
               <ul className="space-y-4">
                 <li><Link href="#como-funciona" className="text-gray-400 hover:text-white transition-colors">Cómo Funciona</Link></li>
                 <li><Link href="#beneficios" className="text-gray-400 hover:text-white transition-colors">Beneficios</Link></li>
-                <li><Link href="#precios" className="text-gray-400 hover:text-white transition-colors">Precios</Link></li>
-                <li><Link href="#contacto" className="text-gray-400 hover:text-white transition-colors">Demo</Link></li>
+                <li><Link href="#contacto" className="text-gray-400 hover:text-white transition-colors">Contacto</Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-6">Soporte</h3>
+              <h3 className="text-lg font-semibold mb-6">Contacto</h3>
               <ul className="space-y-4">
-                <li><Link href="#" className="text-gray-400 hover:text-white transition-colors">Centro de Ayuda</Link></li>
-                <li><Link href="#" className="text-gray-400 hover:text-white transition-colors">Tutoriales</Link></li>
-                <li><Link href="#" className="text-gray-400 hover:text-white transition-colors">Documentación</Link></li>
-                <li><Link href="#" className="text-gray-400 hover:text-white transition-colors">Contacto</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-6">Legal</h3>
-              <ul className="space-y-4">
-                <li><Link href="#" className="text-gray-400 hover:text-white transition-colors">Términos de Servicio</Link></li>
-                <li><Link href="#" className="text-gray-400 hover:text-white transition-colors">Política de Privacidad</Link></li>
-                <li><Link href="#" className="text-gray-400 hover:text-white transition-colors">Seguridad</Link></li>
+                <li><span className="text-gray-400">info@keyon.com</span></li>
+                <li><span className="text-gray-400">+54 9 261 538 1131</span></li>
+                <li><span className="text-gray-400">+54 9 261 614 3039</span></li>
+                <li><span className="text-gray-400">9 de Julio 500, Ciudad de Mendoza</span></li>
               </ul>
             </div>
           </div>

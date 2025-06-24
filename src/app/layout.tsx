@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "@fontsource/inter";
 
 // Forzar renderizado dinámico para toda la aplicación
 export const dynamic = 'force-dynamic'
@@ -26,11 +27,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="es">
+      <body className="bg-[#fafafa] text-[#222] font-sans">
+        <nav className="w-full bg-white border-b border-gray-200 sticky top-0 z-50 px-6 py-3 flex items-center justify-between shadow-sm">
+          {/* Aquí va el logo y los links, no modificar contenido */}
+        </nav>
         {children}
+        <footer className="w-full bg-white border-t border-gray-200 text-gray-500 text-sm py-10 px-6 mt-16">
+          <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            {/* Aquí va el contenido del footer, no modificar contenido */}
+          </div>
+        </footer>
       </body>
     </html>
   );
