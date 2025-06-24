@@ -126,7 +126,7 @@ function HomeContent() {
           <div className="flex-1 relative flex justify-center items-center">
             <div className="w-full max-w-md mx-auto">
               <Image
-                src="/images/keyOn.png"
+                src="/images/KeyOn.png"
                 alt="Dashboard KeyOn"
                 width={400}
                 height={300}
