@@ -538,10 +538,10 @@ function HomeContent() {
       </section>
 
       {/* Sección de contacto */}
-      <section id="contacto" className="py-20 px-4 bg-[#fafafa]">
+      <section id="contacto" className="py-30 px-4 bg-[#fafafa]">
         <div className="container mx-auto max-w-4xl px-8 lg:px-16">
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 flex flex-col md:flex-row">
-            <div className="md:w-1/2 bg-indigo-700 p-12 flex flex-col justify-center rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 flex flex-col md:flex-row min-h-[600px]">
+            <div className="md:w-1/2 bg-indigo-700 p-10 flex flex-col justify-center rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
               <h2 className="text-3xl font-bold mb-6 !text-white">Contáctanos</h2>
               <p className="!text-white mb-8 text-lg font-medium">
                 Nuestro equipo está listo para responder tus dudas y ayudarte a encontrar la mejor solución para tu negocio.
@@ -589,7 +589,7 @@ function HomeContent() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16 px-4">
+      <footer className="bg-gray-900 text-white pt-8 pb-16 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             <div>
@@ -615,7 +615,7 @@ function HomeContent() {
               </div>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-6">Navegación</h3>
+              <h3 className="text-lg font-semibold !text-white mb-6">Navegación</h3>
               <ul className="space-y-4">
                 <li><Link href="#como-funciona" className="text-gray-400 hover:text-white transition-colors">Cómo Funciona</Link></li>
                 <li><Link href="#beneficios" className="text-gray-400 hover:text-white transition-colors">Beneficios</Link></li>
@@ -623,7 +623,7 @@ function HomeContent() {
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-6">Contacto</h3>
+              <h3 className="text-lg font-semibold !text-white mb-6">Contacto</h3>
               <ul className="space-y-4">
                 <li><span className="text-gray-400">info@keyon.com</span></li>
                 <li><span className="text-gray-400">+54 9 261 538 1131</span></li>

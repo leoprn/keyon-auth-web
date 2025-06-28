@@ -75,16 +75,7 @@ async function sendThankYouEmail(contactData: any) {
                       <p style="color: #6b7280; font-size: 12px; margin: 0; line-height: 1.4;">Un gesto y ya estás adentro</p>
                     </div>
                   </div>
-                </div>
-                
-                <div style="text-align: center; margin: 30px 0;">
-                  <p style="color: #6b7280; font-size: 14px; margin: 0 0 10px 0;">
-                    Mientras tanto, podés conocer más sobre KeyOn:
-                  </p>
-                  <a href="https://keyonapp.com" style="display: inline-block; background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%); color: white; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 6px rgba(79, 70, 229, 0.25);">
-                    Visitar KeyOnApp.com
-                  </a>
-                </div>
+                </div>                
               </div>
               
               <!-- Footer -->
