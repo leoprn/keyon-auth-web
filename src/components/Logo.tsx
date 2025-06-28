@@ -9,17 +9,14 @@ interface LogoProps extends HTMLAttributes<HTMLDivElement> {
 
 export default function Logo({ className, ...props }: LogoProps) {
   return (
-    <div className={`flex justify-center ${className || ''}`} {...props}>
-      <div className="relative w-[180px] h-[90px]">
-        <Image
-          src="/images/keyon-logo.png"
-          alt="KeyOn Smart Access"
-          width={180}
-          height={90}
-          className="object-contain"
-          priority
-        />
-      </div>
-    </div>
+    <Image
+      src="/images/keyon-logo.png"
+      alt="KeyOn Smart Access"
+      width={220}
+      height={88}
+      className={`object-contain ${className || ''}`}
+      priority
+      {...props}
+    />
   )
 } 
