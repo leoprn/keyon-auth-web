@@ -6,6 +6,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import Logo from "@/components/Logo";
 import Link from 'next/link';
 import Image from 'next/image';
+import ContactForm from "@/components/ContactForm";
 
 // Forzar renderizado dinámico
 export const dynamic = 'force-dynamic'
@@ -582,50 +583,7 @@ function HomeContent() {
                 </div>
               </div>
             </div>
-            <div className="md:w-1/2 p-12 flex flex-col justify-center bg-gray-50">
-              <h3 className="text-2xl font-bold text-gray-900 mb-8">Solicita información</h3>
-              <form className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Nombre completo
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    placeholder="Ingresá tu nombre completo"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white transition-all duration-200 hover:border-gray-400 text-base shadow-sm"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    placeholder="tu@email.com"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white transition-all duration-200 hover:border-gray-400 text-base shadow-sm"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Mensaje
-                  </label>
-                  <textarea
-                    id="message"
-                    rows={4}
-                    placeholder="Contanos cómo podemos ayudarte..."
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white transition-all duration-200 hover:border-gray-400 text-base resize-none shadow-sm"
-                  ></textarea>
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-indigo-700 hover:bg-indigo-800 text-white py-3 px-6 rounded-lg font-semibold text-base transition-all duration-200 shadow-md"
-                >
-                  Enviar mensaje
-                </button>
-              </form>
-            </div>
+            <ContactForm />
           </div>
         </div>
       </section>
