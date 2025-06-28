@@ -6,6 +6,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import Logo from '@/components/Logo'
 import Link from 'next/link'
 
+
 export default function LoginPage() {
   const router = useRouter()
   const supabase = createClientComponentClient()
@@ -55,10 +56,11 @@ export default function LoginPage() {
         <div className="text-center mb-6">
           <Logo />
           <h1 className="text-2xl font-bold text-gray-800 mt-4">Iniciar Sesión</h1>
+          <p className="text-gray-600 mt-2">Accede a tu cuenta KeyOn</p>
         </div>
         
         {error && (
-          <div className="p-4 mb-6 rounded-lg text-sm bg-red-100 text-red-700">
+          <div className="p-4 mb-6 rounded-lg text-sm bg-red-100 text-red-700" role="alert">
             {error}
           </div>
         )}
@@ -76,6 +78,7 @@ export default function LoginPage() {
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
               placeholder="tu@email.com"
+              autoComplete="email"
             />
           </div>
           
@@ -96,6 +99,7 @@ export default function LoginPage() {
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
               placeholder="••••••••"
+              autoComplete="current-password"
             />
           </div>
           

@@ -59,6 +59,86 @@ function HomeContent() {
   
   return (
     <main className="min-h-screen bg-white overflow-hidden">
+      {/* Datos estructurados específicos para la landing page */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "KeyOn",
+            "description": "Sistema de control de accesos digital que permite acceder a barrios, oficinas, gimnasios y eventos mediante códigos QR desde dispositivos móviles",
+            "category": "Control de Accesos Digital",
+            "brand": {
+              "@type": "Brand",
+              "name": "KeyOn"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "ARS",
+              "availability": "https://schema.org/InStock",
+              "priceValidUntil": "2025-12-31"
+            },
+            "features": [
+              "Acceso con código QR",
+              "Compatible con todos los dispositivos",
+              "Seguridad bancaria",
+              "Gestión de usuarios",
+              "Trazabilidad completa",
+              "Configuración de horarios",
+              "Panel administrativo"
+            ],
+            "applicationCategory": "SecurityApplication",
+            "operatingSystem": "iOS, Android, Web Browser"
+          })
+        }}
+      />
+      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "¿Cómo funciona KeyOn?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "KeyOn funciona de manera simple: abres la app, muestras tu código QR y accedes automáticamente. El sistema detecta si tienes permisos para ingresar a ese barrio, oficina, gimnasio o evento."
+                }
+              },
+              {
+                "@type": "Question", 
+                "name": "¿Es seguro KeyOn?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Sí, KeyOn es tan seguro como una operación bancaria. Utiliza encriptación de nivel empresarial y autenticación de múltiples factores para proteger los accesos."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿En qué dispositivos funciona KeyOn?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "KeyOn es compatible con todos los dispositivos: iOS, Android y navegadores web. Funciona tanto en smartphones como en tablets."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Qué tipos de lugares puedo acceder con KeyOn?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Con KeyOn puedes acceder a barrios privados, oficinas corporativas, gimnasios, coworkings, eventos, estacionamientos y cualquier espacio que implemente el sistema."
+                }
+              }
+            ]
+          })
+        }}
+      />
+
       {/* Barra de navegación */}
       <nav className="bg-white py-4 sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 flex justify-between items-center">
@@ -104,39 +184,55 @@ function HomeContent() {
       <div className="absolute bottom-48 left-0 w-96 h-96 bg-indigo-100 rounded-full opacity-20 -ml-48 z-0"></div>
 
       {/* Header / Hero */}
-      <section className="relative py-20 px-4 overflow-hidden bg-white">
+      <section className="relative py-20 px-4 overflow-hidden bg-white" itemScope itemType="https://schema.org/WebPageElement">
         <div className="container mx-auto max-w-4xl flex flex-col lg:flex-row items-center gap-12 relative z-10 px-8 lg:px-16">
           <div className="flex-1 text-center lg:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight" itemProp="headline">
               Tu celular es tu <span className="text-indigo-700">llave digital universal</span>
             </h1>
-            <p className="text-xl text-gray-500 mb-8 max-w-xl mx-auto lg:mx-0">
+            <p className="text-xl text-gray-500 mb-8 max-w-xl mx-auto lg:mx-0" itemProp="description">
               Abrís la app, mostrás tu QR y accedés a barrios, oficinas, gimnasios, eventos y cualquier espacio. 
               <strong className="text-gray-900">Un solo gesto, como pagar con el celular.</strong>
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link 
                 href="#como-funciona" 
-                className="border border-indigo-700 text-indigo-700 hover:bg-indigo-50 px-8 py-4 rounded-xl font-semibold text-center transition-colors text-lg shadow-sm">
+                className="border border-indigo-700 text-indigo-700 hover:bg-indigo-50 px-8 py-4 rounded-xl font-semibold text-center transition-colors text-lg shadow-sm"
+                aria-label="Ver cómo funciona KeyOn - Navegar a la sección de explicación">
                 Ver Cómo Funciona
               </Link>
             </div>
-            <p className="text-gray-400 text-sm mt-4">Seguro como una operación bancaria • Compatible con todos los dispositivos</p>
+            <p className="text-gray-400 text-sm mt-4">
+              <span className="inline-flex items-center gap-2">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                </svg>
+                Seguro como una operación bancaria
+              </span>
+              {" • "}
+              <span className="inline-flex items-center gap-2">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clipRule="evenodd" />
+                </svg>
+                Compatible con todos los dispositivos
+              </span>
+            </p>
           </div>
           <div className="flex-1 relative flex justify-center items-center">
             <div className="w-full max-w-md mx-auto">
               <Image
                 src="/images/KeyOn.png"
-                alt="Dashboard KeyOn"
+                alt="Interfaz de la aplicación KeyOn mostrando panel de control de accesos digital con códigos QR para acceder a diferentes ubicaciones como barrios, oficinas y gimnasios"
                 width={400}
                 height={300}
                 className="rounded-lg shadow-2xl object-cover w-full h-auto"
                 priority
+                itemProp="image"
               />
             </div>
             {/* Elementos decorativos alrededor de la imagen */}
-            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-indigo-200 rounded-lg z-0"></div>
-            <div className="absolute -top-4 -left-4 w-16 h-16 bg-indigo-100 rounded-full z-0"></div>
+            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-indigo-200 rounded-lg z-0" aria-hidden="true"></div>
+            <div className="absolute -top-4 -left-4 w-16 h-16 bg-indigo-100 rounded-full z-0" aria-hidden="true"></div>
           </div>
         </div>
       </section>
@@ -162,7 +258,7 @@ function HomeContent() {
                 <div className="w-full max-w-md mx-auto">
                   <Image
                     src="/images/keyOn_users.jpeg"
-                    alt="Panel de control KeyOn"
+                    alt="Usuarios utilizando la aplicación KeyOn: personas accediendo a edificios y espacios mediante códigos QR desde sus teléfonos móviles, mostrando la facilidad de uso del sistema"
                     width={400}
                     height={300}
                     className="rounded-xl shadow-xl object-cover w-full h-auto bg-gray-50"
@@ -216,7 +312,7 @@ function HomeContent() {
                 <div className="w-full max-w-md mx-auto">
                   <Image
                     src="/images/key_admin.png"
-                    alt="Panel administrativo KeyOn"
+                    alt="Panel administrativo de KeyOn mostrando interfaz de gestión: lista de usuarios, configuración de permisos, horarios de acceso y trazabilidad de ingresos para administradores de edificios y espacios"
                     width={400}
                     height={300}
                     className="rounded-xl shadow-xl object-contain p-2 w-full h-auto bg-gray-50"
